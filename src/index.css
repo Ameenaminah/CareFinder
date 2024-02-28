@@ -8,10 +8,9 @@
 
 :root {
   --header-height: 3rem;
-  --nav-width: 68px;
-
+  --nav-width: 4em;
   --first-color: #f10086;
-  --bg-color: #e4f2facc;
+  --bg-color: #e4f2fa;
   --main-color: #053d5b;
   --secondary-color: #387596ba;
   --text-color: #fff;
@@ -21,10 +20,22 @@
 
 body {
   background-color: var(--bg-color);
+  overflow: hidden;
 }
 
 a {
   text-decoration: none;
+   all: unset;
+}
+
+a:visited,
+a:active,
+a:focus
+a:focus-visible,
+a:hover {
+  outline: none;
+  border: none;
+  /* color: inherit; */
 }
 
 ul {
@@ -59,21 +70,14 @@ main {
   padding: 0 1rem;
   transition: 0.5s;
 }
-
-.header-toggle {
-  font-size: 1.25rem;
-  cursor: pointer;
-  color: var(--first-color);
-}
-
 .sidebar {
   position: fixed;
   top: 0;
   left: -30%;
-  height: 100vh;
+  height: 90vh;
   width: var(--nav-width);
   background-color: var(--main-color);
-  padding-top: 1rem;
+  padding-top: 1em;
   transition: 0.5s;
   z-index: 999;
 }
@@ -90,12 +94,13 @@ main {
 .nav-link {
   display: grid;
   grid-template-columns: max-content max-content;
-  column-gap: 2rem;
-  padding: 0.5rem 0 0.5rem 1.5rem;
+  column-gap: 2em;
+  padding-block: 1rem;
+  padding-inline: 1.5em;
 }
 
 .nav-logo {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5em;
 }
 
 .nav-logo-icon {
@@ -106,7 +111,7 @@ main {
 
 .nav-logo-name {
   font-weight: 700;
-  color: var(--white-color);
+  color: var(--main-color);
 }
 
 .nav-link {
@@ -118,12 +123,13 @@ main {
 
 .nav-link:hover {
   color: var(--main-color);
-  background-color:var(--text-color) ;
+  background-color: var(--text-color);
 }
 
 .active {
   color: var(--main-color);
   background-color: var(--text-color);
+  border-radius: 1em;
 }
 
 .active::before {

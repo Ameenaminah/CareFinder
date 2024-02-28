@@ -1,0 +1,11 @@
+/* .sidebar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  height: 90vh;
+  width: var(--nav-width);
+  background-color: var(--main-color);
+  padding-top: 1em;
+  transition: 0.5s;
+  z-index: 999;
+} */

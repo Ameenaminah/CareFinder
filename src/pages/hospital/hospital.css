@@ -1,13 +1,18 @@
 .container {
   background-color: var(--text-color);
   border-radius: 3rem;
-  margin: 5rem 1rem;
+  margin: 6em 1rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: calc(90vh - 6rem);
 }
-
+.flex {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
 .searchForm {
   display: flex;
   gap: 1rem;
@@ -25,6 +30,7 @@
 .hospitalFilter {
   border: none;
   outline: none;
+  width: 100%;
 }
 
 .searchInputContainer {
@@ -38,12 +44,17 @@
   padding-block: 0.7rem;
   width: 40%;
 }
-
-.hospitalFilter {
+.hospitalFilterContainer {
   border-radius: 0.3rem;
   border: 1px solid var(--secondary-color);
-  padding-inline: 0.3rem 1rem;
+  padding-inline: 0.5rem;
   max-width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hospitalFilter {
+  border: none;
 }
 
 .divider {
@@ -54,7 +65,6 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 70vh;
   overflow: scroll;
 }
 
@@ -62,14 +72,78 @@
   border-radius: 0.3rem;
   border: 1px solid var(--secondary-color);
   padding: 0.5rem 1rem;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 .hospitalLocation,
 .hospitalOwnership {
   color: #757575;
   font-size: small;
+}
+
+/* HospitalDetails.css */
+.hospitalDetailsOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  background-color: var(--bg-color);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  padding-block-start: 2em;
+  padding-inline: 1.5em;
+  color: var(--main-color);
+  height: 100%;
+  z-index: 9999;
+}
+
+.closeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.detailsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.editButton {
+  padding: 0.5em;
+  background-color: var(--text-color);
+  border: 1px solid var(--main-color);
+  border-radius: 0.5em;
+  color: var(--main-color);
+  cursor: pointer;
+}
+.editButton:hover {
+  background-color: var(--main-color);
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
+.hospitalContent {
+  align-items: center;
+  gap: 1em;
+}
+.hospitalImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hospitalContactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-block-start: 1.5em;
+  color: var(--main-color);
 }
