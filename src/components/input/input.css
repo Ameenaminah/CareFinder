@@ -1,0 +1,23 @@
+label {
+  color: var(--label-text);
+  font-size: 0.9rem;
+}
+.input {
+  width: 100%;
+  padding-inline: 0.5rem;
+  padding-block: 0.7rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border-color);
+  margin-top: 0.3em;
+}
+.input:active,
+.input:focus {
+  border: 1px solid yellow;
+}
+
+.error {
+  font-size: 0.6rem;
+  margin-bottom: 1.5em;
+  margin-left: 0.5em;
+  color: red;
+}

@@ -1,0 +1,16 @@
+.container {
+  width: 40%;
+  height: 60vh;
+  margin: 6em auto;
+}
+form {
+  background-color: var(--text-color);
+  padding: 2em;
+  border-radius: 1em;
+}
+.submit-button {
+  width: 100%;
+  padding-inline: 1em;
+  padding-block: 1em;
+  border-radius: 0.3em;
+}

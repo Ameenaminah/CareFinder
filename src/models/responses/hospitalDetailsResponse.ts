@@ -1,4 +1,4 @@
-import { HospitalResponse, emptyHospitalResponse } from ".";
+import { HospitalResponse, emptyHospitalResponse } from "..";
 
 export interface HospitalDetailsResponse extends HospitalResponse {
   image: string;

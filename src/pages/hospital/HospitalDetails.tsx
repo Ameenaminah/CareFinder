@@ -41,10 +41,10 @@ export const HospitalDetails: FC<Props> = () => {
                 <h4>{hospital?.ownership}</h4>
               </div>
               <div className=" hospitalContactDetails">
-                <div className="flex ">
+                {/* <div className="flex ">
                   <MdLocationOn size={20} />
                   <h3>{hospital?.addresses[0]?.addressLine}</h3>
-                </div>
+                </div> */}
                 <div className="flex">
                   <MdOutlineSmartphone size={20} />
                   <h5>{hospital?.phoneNumber}</h5>

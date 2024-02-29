@@ -1,38 +1,30 @@
-.container {
+.hospitalContainer {
   background-color: var(--text-color);
-  border-radius: 3rem;
-  margin: 6em 1rem;
+  border-radius: 2em;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: calc(90vh - 6rem);
+  height: calc(90vh - 8rem);
+  width: 80%;
+  margin: 3em auto;
 }
 .flex {
   display: flex;
   flex-direction: row;
   gap: 0.2rem;
 }
+
+/* SearchForm */
+
 .searchForm {
-  display: flex;
   gap: 1rem;
   justify-content: flex-start;
 }
-
 .searchButton {
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
 }
-
-.searchInput,
-.searchButton:focus,
-.searchButton:hover,
-.hospitalFilter {
-  border: none;
-  outline: none;
-  width: 100%;
-}
-
 .searchInputContainer {
   display: flex;
   justify-content: flex-start;
@@ -44,10 +36,21 @@
   padding-block: 0.7rem;
   width: 40%;
 }
+.searchInput {
+  width: 100%;
+}
+.searchInput,
+.searchButton:focus,
+.searchButton:hover,
+.hospitalFilter {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .hospitalFilterContainer {
-  border-radius: 0.3rem;
+  border-radius: 0.3em;
   border: 1px solid var(--secondary-color);
-  padding-inline: 0.5rem;
+  padding: 0.5rem;
   max-width: 12%;
   display: flex;
   justify-content: center;
@@ -61,13 +64,13 @@
   border: 0.5px solid var(--secondary-color);
 }
 
+/* hospitalCardsContainer */
 .hospitalCardsContainer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   overflow: scroll;
 }
-
 .hospitalCard {
   border-radius: 0.3rem;
   border: 1px solid var(--secondary-color);
@@ -77,11 +80,11 @@
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
+  color: var(--main-color);
 }
-
 .hospitalLocation,
 .hospitalOwnership {
-  color: #757575;
+  color: var(--small-text);
   font-size: small;
 }
 
@@ -100,7 +103,6 @@
   height: 100%;
   z-index: 9999;
 }
-
 .closeContainer {
   display: flex;
   align-items: center;

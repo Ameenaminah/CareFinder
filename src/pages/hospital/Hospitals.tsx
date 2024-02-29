@@ -1,7 +1,6 @@
-import { FaSearch } from "react-icons/fa";
 import { useInjectedService, useSidebar } from "../../hooks";
 import "./hospital.css";
-import { HospitalCard } from "./HospitalCard";
+import { HospitalCard, SearchForm } from ".";
 import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -19,29 +18,8 @@ export const Hospitals = () => {
   return (
     <>
       <main className={isSidebarOpen ? "space-toggle " : ""}>
-        <div className="container">
-          <section>
-            <form action="" className="searchForm">
-              <div className="hospitalFilterContainer">
-                <select name="hospitalFilter" id="" className="hospitalFilter">
-                  <option value="2">Name</option>
-                  <option value="1">Specialization</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-              <div className="searchInputContainer">
-                <FaSearch color="grey" size={15} />
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="enter search item"
-                  className="searchInput"
-                />
-              </div>
-              <button className="button searchButton">Search</button>
-            </form>
-          </section>
+        <div className="hospitalContainer">
+          <SearchForm />
           <hr className="divider" />
           {!isLoading && hospitals?.items ? (
             <section className="hospitalCardsContainer">

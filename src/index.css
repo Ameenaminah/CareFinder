@@ -9,29 +9,29 @@
 :root {
   --header-height: 3rem;
   --nav-width: 4em;
-  --first-color: #f10086;
-  --bg-color: #e4f2fa;
+  --bg-color: #e5eef4;
   --main-color: #053d5b;
   --secondary-color: #387596ba;
   --text-color: #fff;
-  --first-color-alt: #5eaaca;
-  --white-color: #ffddee;
+  --small-text: #757575;
+  --label-text: #4a5567;
+  --border-color: #e3e8ef;
 }
 
 body {
   background-color: var(--bg-color);
   overflow: hidden;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 a {
   text-decoration: none;
-   all: unset;
+  all: unset;
 }
 
 a:visited,
 a:active,
-a:focus
-a:focus-visible,
+a:focus a:focus-visible,
 a:hover {
   outline: none;
   border: none;
@@ -43,18 +43,22 @@ ul {
 }
 
 main {
+  /* margin: var(--header-height) 0 0 0; */
+  transition: 0.5s;
+  display: grid;
+
   position: relative;
   margin: var(--header-height) 0 0 0;
-  padding: 0 1rem;
-  font-size: 1rem;
-  font-family: "Nunito Sans", sans-serif;
-  transition: 0.5s;
 }
 
 .button {
   background: var(--main-color);
   color: var(--text-color);
+}
+input,
+button {
   border: none;
+  outline: none;
 }
 
 .header {

@@ -14,8 +14,10 @@ export const HospitalCard: FC<HospitalCardProps> = ({ hospital }) => {
         <h3 className="hospitalName">{hospital.name}</h3>
         <div>
           <div className="flex">
-            <IoLocation />
-            <p className="hospitalLocation">{hospital.addresses[0].addressLine}</p>
+            <IoLocation color="var(--small-text)" />
+            <p className="hospitalLocation">
+              {hospital.addresses[0].addressLine}
+            </p>
           </div>
           <p className="hospitalOwnership">{hospital.ownership}</p>
         </div>
