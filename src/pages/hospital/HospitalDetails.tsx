@@ -23,7 +23,7 @@ export const HospitalDetails: FC<Props> = () => {
       {!isLoading ? (
         <div className="hospitalDetailsOverlay">
           <div className="detailsHeader">
-            <Link className="closeContainer" to="../">
+            <Link className="closeContainer" to="..">
               <MdArrowBackIosNew size={20} />
               <p>Back</p>
             </Link>

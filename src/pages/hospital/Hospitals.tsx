@@ -1,7 +1,7 @@
 import { useInjectedService, useSidebar } from "../../hooks";
 import "./hospital.css";
 import { HospitalCard, SearchForm } from ".";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 export const Hospitals = () => {
@@ -20,6 +20,7 @@ export const Hospitals = () => {
       <main className={isSidebarOpen ? "space-toggle " : ""}>
         <div className="hospitalContainer">
           <SearchForm />
+          <Link to="createHospital">Create New</Link>
           <hr className="divider" />
           {!isLoading && hospitals?.items ? (
             <section className="hospitalCardsContainer">

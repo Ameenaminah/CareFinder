@@ -1,5 +1,10 @@
 import "./index.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 import {
   About,
   Home,
@@ -8,26 +13,30 @@ import {
   Reviews,
   Admin,
   HospitalDetails,
+  HospitalForm,
 } from "./pages";
 import { Layout } from "./components";
 
-function App(): JSX.Element {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="hospitals" element={<Hospitals />}>
-            <Route path=":id" element={<HospitalDetails />} />
-          </Route>
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="admin" element={<Admin />} />
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="hospitals" element={<Hospitals />}>
+          <Route path=":id" element={<HospitalDetails />} />
+          <Route path="createHospital" element={<HospitalForm />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="admin" element={<Admin />} />
+      </Route>
+    </Route>
+  )
+);
+
+function App(): JSX.Element {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

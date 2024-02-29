@@ -1,35 +1,18 @@
 import { UseFormRegister, Path } from "react-hook-form";
 
 import "./input.css";
-import { FC, useCallback, useState } from "react";
+import { FC } from "react";
 import { RegisterValues } from "../../pages/admin/validation";
 import { HospitalValues } from "../../pages/hospital/validation";
 
 interface Props {
   label: string;
   name: Path<RegisterValues | HospitalValues>;
-  register: UseFormRegister<RegisterValues | HospitalValues>;
-  error: string ;
+  register: UseFormRegister<T>;
+  error: string | undefined;
   type: string;
 }
 export const Input: FC<Props> = ({ register, name, error, label, type }) => {
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
-
-  const handleBlur = useCallback(() => {
-    setIsFocused(false);
-  }, []);
-
-  const getBorderColor = useCallback(() => {
-    if (error) {
-      return "red";
-    }
-    return isFocused ?  "var(--secondary-color)": "var(--border-color)";
-  }, [isFocused, error]);
-
   return (
     <div className="form-control">
       <label htmlFor="lastName">{label}</label>
@@ -38,9 +21,11 @@ export const Input: FC<Props> = ({ register, name, error, label, type }) => {
         type={type}
         id={name}
         {...register(name)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        style={{ borderColor: getBorderColor() }}
+        style={
+          error
+            ? { borderColor: "red" }
+            : { borderColor: "var(--border-color)" }
+        }
       />
       <p className="error">{error}</p>
     </div>

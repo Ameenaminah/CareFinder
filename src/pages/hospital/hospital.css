@@ -149,3 +149,15 @@
   margin-block-start: 1.5em;
   color: var(--main-color);
 }
+
+
+/* CreateHospital */
+.hospital-form {
+  background-color: var(--text-color);
+  padding: 2em;
+  border-radius: 1em;
+  width: 50%;
+  margin: 3em auto;
+  height: 60vh;
+  overflow: scroll;
+}

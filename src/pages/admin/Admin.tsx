@@ -18,7 +18,6 @@ export const Admin = () => {
   };
 
   const {
-    // control,
     // handleSubmit,
     register,
     formState: { errors },
@@ -29,47 +28,45 @@ export const Admin = () => {
   });
 
   return (
-    <main className={` ${isSidebarOpen ? "space-toggle" : ""}`}>
-      <section className="container">
-        <form action="">
-          <Input
-            name="firstName"
-            label="First Name"
-            register={register}
-            error={errors.firstName?.message}
-            type="text"
-          />
-          <Input
-            name="lastName"
-            label="Last Name"
-            register={register}
-            error={errors.lastName?.message}
-            type="text"
-          />
-          <Input
-            name="email"
-            label="Email Address"
-            register={register}
-            error={errors.email?.message}
-            type="email"
-          />
-          <Input
-            name="password"
-            label="Password"
-            register={register}
-            error={errors.password?.message}
-            type="password"
-          />
-          <Input
-            name="confirmPassword"
-            label="Confirm Password"
-            register={register}
-            error={errors.confirmPassword?.message}
-            type="password"
-          />
-          <button className="button submit-button">Submit</button>
-        </form>
-      </section>
+    <main className={isSidebarOpen ? "space-toggle" : ""}>
+      <form action="" className="admin-form">
+        <Input
+          name="firstName"
+          label="First Name"
+          register={register}
+          error={errors.firstName?.message}
+          type="text"
+        />
+        <Input
+          name="lastName"
+          label="Last Name"
+          register={register}
+          error={errors.lastName?.message}
+          type="text"
+        />
+        <Input
+          name="email"
+          label="Email Address"
+          register={register}
+          error={errors.email?.message}
+          type="email"
+        />
+        <Input
+          name="password"
+          label="Password"
+          register={register}
+          error={errors.password?.message}
+          type="password"
+        />
+        <Input
+          name="confirmPassword"
+          label="Confirm Password"
+          register={register}
+          error={errors.confirmPassword?.message}
+          type="password"
+        />
+        <button className="button admin-submit-button">Submit</button>
+      </form>
     </main>
   );
 };
