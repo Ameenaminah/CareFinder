@@ -4,6 +4,7 @@ import "./input.css";
 import { FC } from "react";
 import { RegisterValues } from "../../pages/admin/validation";
 import { HospitalValues } from "../../pages/hospital/validation";
+import { LabelContainer } from "./LabelContainer";
 
 interface Props {
   label: string;
@@ -14,8 +15,7 @@ interface Props {
 }
 export const Input: FC<Props> = ({ register, name, error, label, type }) => {
   return (
-    <div className="form-control">
-      <label htmlFor="lastName">{label}</label>
+    <LabelContainer label={label} name={name} error={error}>
       <input
         className="input"
         type={type}
@@ -26,8 +26,8 @@ export const Input: FC<Props> = ({ register, name, error, label, type }) => {
             ? { borderColor: "red" }
             : { borderColor: "var(--border-color)" }
         }
+        placeholder={label}
       />
-      <p className="error">{error}</p>
-    </div>
+    </LabelContainer>
   );
 };

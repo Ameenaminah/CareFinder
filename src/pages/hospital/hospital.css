@@ -47,19 +47,6 @@
   outline: none;
   cursor: pointer;
 }
-.hospitalFilterContainer {
-  border-radius: 0.3em;
-  border: 1px solid var(--secondary-color);
-  padding: 0.5rem;
-  max-width: 12%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.hospitalFilter {
-  border: none;
-}
-
 .divider {
   border: 0.5px solid var(--secondary-color);
 }
@@ -89,19 +76,8 @@
 }
 
 /* HospitalDetails.css */
-.hospitalDetailsOverlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 40%;
-  background-color: var(--bg-color);
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-  padding-block-start: 2em;
-  padding-inline: 1.5em;
-  color: var(--main-color);
-  height: 100%;
-  z-index: 9999;
+.hospital-details-container {
+  padding-block-start: 1em;
 }
 .closeContainer {
   display: flex;
@@ -113,7 +89,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2em;
 }
 .editButton {
   padding: 0.5em;
@@ -136,7 +111,7 @@
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  background-color: red;
+  background-color: var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,7 +124,6 @@
   margin-block-start: 1.5em;
   color: var(--main-color);
 }
-
 
 /* CreateHospital */
 .hospital-form {

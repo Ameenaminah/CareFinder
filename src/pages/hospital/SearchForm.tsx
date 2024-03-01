@@ -1,16 +1,18 @@
 import { FaSearch } from "react-icons/fa";
+import { SelectInput } from "../../components";
 
 export const SearchForm = () => {
   return (
     <section>
       <form action="" className="searchForm flex">
-        <div className="hospitalFilterContainer">
-          <select name="hospitalFilter" id="" className="hospitalFilter">
-            <option value="2">Name</option>
-            <option value="1">Specialization</option>
-            <option value="3">3</option>
-          </select>
-        </div>
+        <SelectInput
+          placeholder="Filter By"
+          options={[
+            { value: "name", label: "Name" },
+            { value: "specialization", label: "Specialization" },
+            { value: "state", label: "State" },
+          ]}
+        />
         <div className="searchInputContainer">
           <FaSearch color="grey" size={15} />
           <input

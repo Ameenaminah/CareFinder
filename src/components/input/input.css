@@ -21,3 +21,13 @@ label {
   margin-left: 0.5em;
   color: red;
 }
+
+/* SelectInput */
+
+.select-input {
+  border-color: var(--secondary-color);
+}
+.select-input:active,
+.select-input:focus {
+  border: 1px solid var(--secondary-color);
+}

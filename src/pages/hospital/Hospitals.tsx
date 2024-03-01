@@ -1,15 +1,20 @@
 import { useInjectedService, useSidebar } from "../../hooks";
 import "./hospital.css";
 import { HospitalCard, SearchForm } from ".";
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "../../components";
 
 export const Hospitals = () => {
   const { isSidebarOpen } = useSidebar();
   const { hospitalService } = useInjectedService();
 
-  const { data: hospitals, isLoading } = useQuery({
-    queryKey: ["hospital"],
+  const {
+    isLoading,
+    error,
+    data: hospitals,
+  } = useQuery({
+    queryKey: ["hospitals"],
     queryFn: async () => {
       return await hospitalService.getHospitals();
     },
@@ -22,6 +27,7 @@ export const Hospitals = () => {
           <SearchForm />
           <Link to="createHospital">Create New</Link>
           <hr className="divider" />
+          {error && <p>{error.message}</p>}
           {!isLoading && hospitals?.items ? (
             <section className="hospitalCardsContainer">
               {hospitals?.items.map((hospital) => {
@@ -29,7 +35,7 @@ export const Hospitals = () => {
               })}
             </section>
           ) : (
-            <h1>Loading</h1>
+            <Spinner />
           )}
         </div>
       </main>
