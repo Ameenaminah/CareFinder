@@ -1,5 +1,7 @@
 import { IRestService } from "./restService";
 import {
+  CreateHospitalRequest,
+  HospitalCreatedResponse,
   HospitalDetailsResponse,
   HospitalResponse,
   PagedListResponse,
@@ -8,6 +10,9 @@ import {
 export interface IHospitalService {
   getHospitals(): Promise<PagedListResponse<HospitalResponse> | null>;
   getHospital(id: string | undefined): Promise<HospitalDetailsResponse | null>;
+  createHospital(
+    input: CreateHospitalRequest
+  ): Promise<HospitalCreatedResponse | null>;
 }
 
 export class HospitalService implements IHospitalService {
@@ -42,6 +47,25 @@ export class HospitalService implements IHospitalService {
     } catch (error) {
       console.error(`unable to get hospital: ${error}`);
     }
+    return null;
+  }
+
+  async createHospital(
+    input: CreateHospitalRequest
+  ): Promise<HospitalCreatedResponse | null> {
+    try {
+      const url = "/hospitals";
+
+      const newHospitalResponse = await this.restService.post<
+        HospitalCreatedResponse,
+        CreateHospitalRequest
+      >(url, input);
+
+      return newHospitalResponse;
+    } catch (error) {
+      console.error(`Unable to create a hospital: ${error}`);
+    }
+
     return null;
   }
 }

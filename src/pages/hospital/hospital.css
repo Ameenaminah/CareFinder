@@ -47,6 +47,18 @@
   outline: none;
   cursor: pointer;
 }
+.hospitalFilterContainer {
+  border-radius: 0.3em;
+  border: 1px solid var(--secondary-color);
+  padding: 0.5rem;
+  max-width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hospitalFilter {
+  border: none;
+}
 .divider {
   border: 0.5px solid var(--secondary-color);
 }
@@ -84,11 +96,15 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  gap: 0.5em;
 }
 .detailsHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.detailsHeader:hover {
+  color: red;
 }
 .editButton {
   padding: 0.5em;
@@ -134,4 +150,16 @@
   margin: 3em auto;
   height: 60vh;
   overflow: scroll;
+}
+
+/* HospitalForm */
+
+.close-form {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

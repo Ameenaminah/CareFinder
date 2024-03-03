@@ -25,7 +25,7 @@ export const Hospitals = () => {
       <main className={isSidebarOpen ? "space-toggle " : ""}>
         <div className="hospitalContainer">
           <SearchForm />
-          <Link to="createHospital">Create New</Link>
+          <Link to="create">Create New</Link>
           <hr className="divider" />
           {error && <p>{error.message}</p>}
           {!isLoading && hospitals?.items ? (

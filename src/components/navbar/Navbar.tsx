@@ -3,8 +3,9 @@ import { FaBars, FaRegBell } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useSidebar } from "../../hooks";
 import { useLocation } from "react-router-dom";
+import { FC } from "react";
 
-export const Navbar = () => {
+export const Navbar: FC= () => {
   const location = useLocation();
   const { toggleSidebar, isSidebarOpen } = useSidebar();
 
