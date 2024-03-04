@@ -1,3 +1,3 @@
 export interface AddressCreatedResponse {
-  id: string;
+  id: number;
 }

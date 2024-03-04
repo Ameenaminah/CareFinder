@@ -23,3 +23,17 @@ export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup
     about: yup.string().required("Required"),
     image: yup.string().nullable(),
   });
+
+export interface AddressValues {
+  addressLine: string;
+  state: string;
+  postalCode?: string;
+  hospitalId: number;
+}
+
+export const addressSchema: yup.ObjectSchema<AddressValues> = yup.object().shape({
+  addressLine: yup.string().required(" AddressLine is required"),
+  state: yup.string().required("State is required"),
+  hospitalId: yup.number().required("Required"),
+  postalCode: yup.string().nullable(),
+});

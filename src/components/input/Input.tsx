@@ -3,12 +3,12 @@ import { UseFormRegister, Path } from "react-hook-form";
 import "./input.css";
 import { FC } from "react";
 import { RegisterValues } from "../../pages/admin/validation";
-import { HospitalValues } from "../../pages/hospital/validation";
+import { AddressValues, HospitalValues } from "../../pages/hospital/validation";
 import { LabelContainer } from "./LabelContainer";
 
 interface Props {
   label: string;
-  name: Path<RegisterValues | HospitalValues>;
+  name: Path<RegisterValues | HospitalValues| AddressValues>;
   register: UseFormRegister<T>;
   error: string | undefined;
   type: string;

@@ -1,7 +1,7 @@
 import { AddressResponse } from "./addressResponse";
 
 export interface HospitalResponse {
-  id: string;
+  id: number;
   name: string;
   specialization: string;
   ownership: string;
@@ -12,7 +12,7 @@ export interface HospitalResponse {
 }
 
 export const emptyHospitalResponse: HospitalResponse = {
-  id: "",
+  id: 0,
   name: "",
   specialization: "",
   ownership: "",

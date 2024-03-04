@@ -1,12 +1,12 @@
 export interface AddressResponse {
-  id: string;
+  id: number;
   addressLine: string;
   state: string;
   postalCode?: string;
 }
 
 export const emptyAddressResponse: AddressResponse = {
-  id: "",
+  id: 0,
   addressLine: "",
   state: "",
   postalCode: "",

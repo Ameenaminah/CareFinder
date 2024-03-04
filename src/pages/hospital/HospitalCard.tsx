@@ -9,20 +9,19 @@ interface HospitalCardProps {
 
 export const HospitalCard: FC<HospitalCardProps> = ({ hospital }) => {
   const { id, name, addresses, ownership } = hospital;
-  // const navigate = useNavigate();
-
-  // const handleOnclick = useCallback(() => {
-  //   navigate(`/${id}`);
-  // }, [id]);
-
+ 
   return (
-    <Link to={id}>
+    <Link to={`${id}`}>
       <div className="hospitalCard">
         <h3 className="hospitalName">{name}</h3>
         <div>
           <div className="flex">
             <IoLocation color="var(--small-text)" />
-            <p className="hospitalLocation">{addresses[0].addressLine}</p>
+            {/* {addresses ? (
+              <p className="hospitalLocation">{addresses[0].addressLine}</p>
+            ) : (
+              ""
+            )} */}
           </div>
           <p className="hospitalOwnership">{ownership}</p>
         </div>

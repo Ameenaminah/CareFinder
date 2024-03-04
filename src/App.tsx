@@ -14,6 +14,7 @@ import {
   Admin,
   HospitalDetails,
   HospitalForm,
+  CreateAddress,
 } from "./pages";
 import { Layout } from "./components";
 
@@ -25,7 +26,8 @@ const router = createBrowserRouter(
         <Route path="hospitals" element={<Hospitals />}>
           <Route path=":id" element={<HospitalDetails />} />
           <Route path=":id/edit" element={<HospitalForm isEditMode />} />
-          <Route path="create" element={<HospitalForm  />} />
+          <Route path="create" element={<HospitalForm />} />
+          <Route path=":id/addresses/create" element={<CreateAddress />} />
         </Route>
 
         <Route path="about" element={<About />} />

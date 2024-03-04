@@ -9,7 +9,7 @@ import {
 
 export interface IHospitalService {
   getHospitals(): Promise<PagedListResponse<HospitalResponse> | null>;
-  getHospital(id: string | undefined): Promise<HospitalDetailsResponse | null>;
+  getHospital(id: number | undefined): Promise<HospitalDetailsResponse | null>;
   createHospital(
     input: CreateHospitalRequest
   ): Promise<HospitalCreatedResponse | null>;
@@ -34,9 +34,7 @@ export class HospitalService implements IHospitalService {
     return null;
   }
 
-  async getHospital(
-    id: string | undefined
-  ): Promise<HospitalDetailsResponse | null> {
+  async getHospital(id: number): Promise<HospitalDetailsResponse | null> {
     try {
       const url = `/hospitals/${id}`;
 

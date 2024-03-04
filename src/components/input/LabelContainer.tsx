@@ -3,11 +3,11 @@ import { Path } from "react-hook-form";
 import "./input.css";
 import { FC, ReactNode } from "react";
 import { RegisterValues } from "../../pages/admin/validation";
-import { HospitalValues } from "../../pages/hospital/validation";
+import { AddressValues, HospitalValues } from "../../pages/hospital/validation";
 
 interface Props {
   label: string;
-  name: Path<RegisterValues | HospitalValues>;
+  name: Path<RegisterValues | HospitalValues| AddressValues>;
   error: string | undefined;
   children: ReactNode;
 }

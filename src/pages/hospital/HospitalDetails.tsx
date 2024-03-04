@@ -15,7 +15,7 @@ export const HospitalDetails: FC<Props> = () => {
   const { data: hospital, isFetching } = useQuery({
     queryKey: ["hospital"],
     queryFn: async () => {
-      return await hospitalService.getHospital(id);
+      return await hospitalService.getHospital(Number(id));
     },
   });
 
