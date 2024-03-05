@@ -20,7 +20,7 @@ export class HospitalService implements IHospitalService {
 
   async getHospitals(): Promise<PagedListResponse<HospitalResponse> | null> {
     try {
-      const url = `/hospitals`;
+      const url = `/hospitals?StartIndex=0&PageSize=12&PageNumber=1`;
 
       const hospitalsResponse =
         await this.restService.get<PagedListResponse<HospitalResponse> | null>(

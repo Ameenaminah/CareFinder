@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: calc(90vh - 6rem);
+  height: calc(90vh - 3rem);
   width: 95%;
   margin: 2em auto;
 }
@@ -16,10 +16,16 @@
 }
 
 /* SearchForm */
+.search-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .searchForm {
   gap: 1rem;
-  justify-content: flex-start;
+  display: flex;
 }
 .searchButton {
   padding: 0.5rem 1rem;
@@ -29,15 +35,17 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 0.3rem;
+  border-radius: 1rem;
   gap: 0.3rem;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid none;
   padding-inline: 0.5rem;
   padding-block: 0.7rem;
-  width: 40%;
+  width: 100%;
+  background-color: #ebf5ff;
 }
 .searchInput {
-  width: 100%;
+  background-color: #ebf5ff;
+  color: #969696;
 }
 .searchInput,
 .searchButton:focus,
@@ -45,32 +53,21 @@
 .hospitalFilter {
   border: none;
   outline: none;
-  cursor: pointer;
 }
 .hospitalFilterContainer {
-  border-radius: 0.3em;
-  border: 1px solid var(--secondary-color);
-  padding: 0.5rem;
-  max-width: 20%;
+  border-radius: 1em;
+  border: 1px solid var(--button-color);
+  background-color: var(--white);
+  padding-inline: 0.5rem;
+  padding-block: 0.7rem;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .hospitalFilter {
-  border-radius: 0.3em;
-  border: 1px solid var(--border-color);
-  padding: 0.5rem;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.5em;
-}
-.hospitalFilter option {
   border: none;
-}
-.divider {
-  border: 0.5px solid var(--secondary-color);
+  outline: none;
 }
 
 /* hospitalCardsContainer */
@@ -98,9 +95,6 @@
 }
 
 /* HospitalDetails.css */
-.hospital-details-container {
-  padding-block-start: 1em;
-}
 .closeContainer {
   display: flex;
   align-items: center;
@@ -112,9 +106,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.detailsHeader:hover {
-  color: red;
 }
 .editButton {
   padding: 1em 2em;
@@ -164,12 +155,11 @@
 }
 
 /* HospitalForm */
-
 .close-form {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: var(--text-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,4 +169,16 @@ textarea {
   display: flex;
   margin-top: 0.5em;
   width: 100%;
+}
+.ownershipContainer {
+  width: 30%;
+  margin-top: 0.5em;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.create-button{
+  width: 50%;
 }

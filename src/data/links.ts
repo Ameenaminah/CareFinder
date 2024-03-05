@@ -1,8 +1,9 @@
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineUser } from "react-icons/ai";
-import { FiMessageSquare, FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart } from "react-icons/fi";
+import { GiHospitalCross } from "react-icons/gi";
+import { RiAdminFill } from "react-icons/ri";
 
 interface Link {
   id: number;
@@ -22,7 +23,7 @@ const links: Link[] = [
     id: 2,
     link: "Hospitals",
     to: "hospitals",
-    icon: FiMessageSquare,
+    icon: GiHospitalCross,
   },
   {
     id: 3,
@@ -46,7 +47,7 @@ const links: Link[] = [
     id: 6,
     link: "Admin",
     to: "admin",
-    icon: AiOutlineUser,
+    icon: RiAdminFill,
   },
 ];
 

@@ -40,7 +40,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
   });
 
   const handleAddHospital = useCallback(
-    async (formData) => {
+    async (formData: HospitalValues) => {
       const hospitalInput: CreateHospitalRequest = {
         name: formData.name,
         specialization: formData.specialization,
@@ -51,12 +51,10 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
         about: formData.about,
         image: formData.image,
       };
-      console.log(hospitalInput, "here");
 
       const newHospitalData = await hospitalService.createHospital(
         hospitalInput
       );
-      console.log(newHospitalData, "here");
 
       if (!newHospitalData) {
         return;
@@ -74,11 +72,6 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       closable={false}
       width={500}
       open
-      styles={{
-        body: {
-          paddingBottom: 80,
-        },
-      }}
       title={
         <div className="detailsHeader">
           <div className="closeContainer">
@@ -87,98 +80,95 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             </Link>
             <p>{isEditMode ? "Edit a Hospital" : "Create a Hospital"}</p>
           </div>
-
-          <button
-            className="button editButton"
-            type="submit"
-            onClick={handleSubmit(handleAddHospital)}
-          >
-            {isEditMode ? "Edit " : "Create"}
-          </button>
         </div>
       }
       className="hospital-details-container"
       style={{ backgroundColor: "var(--bg-color)" }}
     >
-      {
-        !isSubmitting ? 
-        (
-          <form onSubmit={handleSubmit(handleAddHospital)}>
-        <Input
-          name="name"
-          label="Hospital Name"
-          register={register}
-          error={errors.name?.message}
-          type="text"
-        />
-        <Input
-          name="phoneNumber"
-          label="Phone Number"
-          register={register}
-          error={errors.phoneNumber?.message}
-          type="text"
-        />
-        <Input
-          name="website"
-          label="Website"
-          register={register}
-          error={errors.website?.message}
-          type="url"
-        />
-        <Input
-          name="email"
-          label="Email Address"
-          register={register}
-          error={errors.email?.message}
-          type="text"
-        />
-        <Input
-          name="specialization"
-          label="Specialization"
-          register={register}
-          error={errors.specialization?.message}
-          type="text"
-        />
-        <Input
-          name="image"
-          label="Image"
-          register={register}
-          error={errors.image?.message}
-          type="text"
-        />
-        <LabelContainer
-          name="ownership"
-          label="Ownership"
-          error={errors.image?.message}
-        >
-          <div className="">
-            <select {...register("ownership")} className="hospitalFilter">
-              <option value="" disabled hidden>
-                Select a type
-              </option>
-              <option value="private">Private</option>
-              <option value="public">Public</option>
-            </select>
-          </div>
-        </LabelContainer>
-        <LabelContainer
-          name="about"
-          label="About"
-          error={errors.about?.message}
-        >
-          <textarea
-            id="about"
-            placeholder="Type your Markdown content here..."
-            {...register("about")}
-            rows={5}
+      {!isSubmitting ? (
+        <form onSubmit={handleSubmit(handleAddHospital)}>
+          <Input
+            name="name"
+            label="Hospital Name"
+            register={register}
+            error={errors.name?.message}
+            type="text"
           />
-        </LabelContainer>
-      </form>
-        ) 
-        :
+          <Input
+            name="phoneNumber"
+            label="Phone Number"
+            register={register}
+            error={errors.phoneNumber?.message}
+            type="text"
+          />
+          <Input
+            name="website"
+            label="Website"
+            register={register}
+            error={errors.website?.message}
+            type="url"
+          />
+          <Input
+            name="email"
+            label="Email Address"
+            register={register}
+            error={errors.email?.message}
+            type="text"
+          />
+          <Input
+            name="specialization"
+            label="Specialization"
+            register={register}
+            error={errors.specialization?.message}
+            type="text"
+          />
+          <Input
+            name="image"
+            label="Image"
+            register={register}
+            error={errors.image?.message}
+            type="text"
+          />
+          <LabelContainer
+            name="ownership"
+            label="Ownership"
+            error={errors.image?.message}
+          >
+            <div className="hospitalFilterContainer ownershipContainer ">
+              <select {...register("ownership")} className="hospitalFilter">
+                <option value="" disabled hidden>
+                  Select a type
+                </option>
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
+            </div>
+          </LabelContainer>
+          <LabelContainer
+            name="about"
+            label="About"
+            error={errors.about?.message}
+          >
+            <textarea
+              id="about"
+              placeholder="Type your Markdown content here..."
+              {...register("about")}
+              rows={5}
+            />
+          </LabelContainer>
+          <div className="button-container">
+            <button
+              className="button create-button"
+              type="submit"
+              onClick={handleSubmit(handleAddHospital)}
+            >
+              {isEditMode ? "Edit " : "Create"}
+            </button>
+          </div>
+        </form>
+      ) : (
         <Spinner />
-      }
-      
+      )}
     </Drawer>
   );
 };

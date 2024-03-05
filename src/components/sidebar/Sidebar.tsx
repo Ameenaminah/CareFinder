@@ -1,23 +1,21 @@
 import React, { FC } from "react";
 import "./sidebar.css";
 import { Link, NavLink } from "react-router-dom";
-import { AiOutlineUser } from "react-icons/ai";
-import { links } from "../../data";
+import { links } from "../../data/links";
 import { useSidebar } from "../../hooks";
+import { Logo } from "../../assets";
 
 interface SidebarProps {}
 
 export const Sidebar: FC<SidebarProps> = () => {
   const { isSidebarOpen } = useSidebar();
-  
-   
 
   return (
     <aside className={`sidebar ${isSidebarOpen ? "show" : ""}`}>
       <div className="nav">
         <div>
           <Link to="/" className="nav-logo">
-            <AiOutlineUser size={20} color="pink" />
+            <img src={Logo} className="logo" alt="CareFinder logo" />
             <span className="nav-logo-name">CareFinder</span>
           </Link>
           <nav className="nav-list">

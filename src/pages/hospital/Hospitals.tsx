@@ -1,9 +1,13 @@
-import { useInjectedService, useSidebar } from "../../hooks";
-import "./hospital.css";
-import { HospitalCard, SearchForm } from ".";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Table } from "antd";
+
+import "./hospital.css";
+import { useInjectedService, useSidebar } from "../../hooks";
+import { SearchForm } from ".";
 import { Spinner } from "../../components";
+import { columns } from "../../data/columns";
 
 export const Hospitals = () => {
   const { isSidebarOpen } = useSidebar();
@@ -20,20 +24,40 @@ export const Hospitals = () => {
     },
   });
 
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  const hasSelected = selectedRowKeys.length > 0;
+
   return (
     <>
       <main className={isSidebarOpen ? "space-toggle " : ""}>
         <div className="hospitalContainer">
           <SearchForm />
-          <Link to="create">Create New</Link>
           <hr className="divider" />
           {error && <p>{error.message}</p>}
           {!isLoading && hospitals?.items ? (
-            <section className="hospitalCardsContainer">
-              {hospitals?.items.map((hospital) => {
-                return <HospitalCard key={hospital.id} hospital={hospital} />;
-              })}
-            </section>
+            <div className="hospitalCardsContainer">
+              <span style={{ marginLeft: 8 }}>
+                {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
+              </span>
+              <Table
+                rowSelection={rowSelection}
+                columns={columns}
+                dataSource={hospitals?.items.map((hospital) => ({
+                  ...hospital,
+                  key: hospital.id,
+                }))}
+              />
+            </div>
           ) : (
             <Spinner />
           )}

@@ -1,18 +1,10 @@
 import { FaSearch } from "react-icons/fa";
-import { SelectInput } from "../../components";
+import { Link } from "react-router-dom";
 
 export const SearchForm = () => {
   return (
-    <section>
-      <form action="" className="searchForm flex">
-        <SelectInput
-          placeholder="Filter By"
-          options={[
-            { value: "name", label: "Name" },
-            { value: "specialization", label: "Specialization" },
-            { value: "state", label: "State" },
-          ]}
-        />
+    <section className="search-form-container">
+      <form action="" className="searchForm ">
         <div className="searchInputContainer">
           <FaSearch color="grey" size={15} />
           <input
@@ -23,8 +15,21 @@ export const SearchForm = () => {
             className="searchInput"
           />
         </div>
-        <button className="button searchButton">Search</button>
+        <div className="hospitalFilterContainer">
+          <select className="hospitalFilter">
+            <option value="" disabled hidden >
+              Filter By
+            </option>
+            <option value="name">Name</option>
+            <option value="specialization">Specialization</option>
+            <option value="state">State</option>
+          </select>
+        </div>
       </form>
+      {/* <button className="button searchButton">Add new Hospital</button> */}
+      <Link to="create" className="button">
+        Add new Hospital
+      </Link>
     </section>
   );
 };

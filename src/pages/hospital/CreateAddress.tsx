@@ -34,25 +34,24 @@ export const CreateAddress = () => {
     mode: "onBlur",
   });
 
-  const handleCreateAddressButton = useCallback(async (formData) => {
-    console.log(formData, "123");
+  const handleCreateAddressButton = useCallback(
+    async (formData: AddressValues) => {
+      const addressInput: CreateAddressRequest = {
+        addressLine: formData.addressLine,
+        state: formData.state,
+        postalCode: formData.postalCode,
+        hospitalId: id,
+      };
 
-    const addressInput: CreateAddressRequest = {
-      addressLine: formData.addressLine,
-      state: formData.state,
-      postalCode: formData.postalCode,
-      hospitalId: id,
-    };
-    console.log(addressInput, "here");
+      const newAddressData = await addressService.createAddress(addressInput);
 
-    const newAddressData = await addressService.createAddress(addressInput);
-
-    if (!newAddressData) {
-      return;
-    }
-    console.log(newAddressData);
-    navigate("/");
-  }, [id, addressService, navigate]);
+      if (!newAddressData) {
+        return;
+      }
+      navigate("hospitals");
+    },
+    [id, addressService, navigate]
+  );
 
   return (
     <Drawer
