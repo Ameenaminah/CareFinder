@@ -4,13 +4,13 @@ import { HospitalResponse } from "../../../models";
 
 interface HospitalState {
   value: {
-    items: HospitalResponse[];
+    hospitals: HospitalResponse[];
   };
 }
 
 const initialState: HospitalState = {
   value: {
-    items: [],
+    hospitals: [],
   },
 };
 
@@ -18,21 +18,21 @@ const hospitalSlice = createSlice({
   name: "hospital",
   initialState,
   reducers: {
-    setHospitalItems: (state, action: PayloadAction<HospitalResponse[]>) => {
-      state.value.items = action.payload;
+    setHospitals: (state, action: PayloadAction<HospitalResponse[]>) => {
+      state.value.hospitals = action.payload;
     },
     addHospital: (state, action: PayloadAction<HospitalResponse>) => {
-      state.value.items = [action.payload, ...state.value.items];
+      state.value.hospitals = [action.payload, ...state.value.hospitals];
     },
     updateHospital: (state, action: PayloadAction<HospitalResponse>) => {
-      const filteredSpaces = state.value.items.filter(
+      const filteredSpaces = state.value.hospitals.filter(
         (s) => s.id !== action.payload.id
       );
-      state.value.items = [action.payload, ...filteredSpaces];
+      state.value.hospitals = [action.payload, ...filteredSpaces];
     },
   },
 });
 
-export const { setHospitalItems, addHospital, updateHospital } =
+export const { setHospitals, addHospital, updateHospital } =
   hospitalSlice.actions;
 export default hospitalSlice.reducer;

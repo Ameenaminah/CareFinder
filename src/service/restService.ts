@@ -16,7 +16,7 @@ export interface IRestService {
     url: string,
     data: TData,
     headers?: Record<string, string>
-  ): Promise<TResponse | null>;
+  ): Promise<TResponse>;
 
   delete(url: string, headers?: Record<string, string>): Promise<AxiosResponse>;
 
@@ -30,9 +30,6 @@ export interface IRestService {
 
 export class RestService implements IRestService {
   constructor(private readonly baseUrl: string) {}
-  // constructor(baseUrl: string) {
-  //   this.baseUrl = baseUrl;
-  // }
 
   async get<TResponse>(
     url: string,
@@ -73,7 +70,7 @@ export class RestService implements IRestService {
     headers: Record<string, string>
   ): Promise<TResponse> {
     try {
-     const fullUrl = this.getFullUrl(url);
+      const fullUrl = this.getFullUrl(url);
 
       const response = await axios.put<TResponse>(fullUrl, data, { headers });
 
@@ -89,7 +86,7 @@ export class RestService implements IRestService {
     headers?: Record<string, string>
   ): Promise<AxiosResponse> {
     try {
-     const fullUrl = this.getFullUrl(url);
+      const fullUrl = this.getFullUrl(url);
       const response = await axios.delete(fullUrl, { headers });
       return response.data;
     } catch (error) {

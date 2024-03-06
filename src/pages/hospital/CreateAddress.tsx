@@ -1,6 +1,6 @@
 import { Drawer, Space } from "antd";
 import { MdArrowBackIosNew } from "react-icons/md";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Input, Spinner } from "../../components";
 import { useInjectedService } from "../../hooks";
 import { useForm } from "react-hook-form";
@@ -12,8 +12,7 @@ import { useCallback } from "react";
 
 export const CreateAddress = () => {
   const { addressService } = useInjectedService();
-  const location = useLocation();
-  const id = location.state.newHospitalData;
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -40,7 +39,7 @@ export const CreateAddress = () => {
         addressLine: formData.addressLine,
         state: formData.state,
         postalCode: formData.postalCode,
-        hospitalId: id,
+        hospitalId: Number(id),
       };
 
       const newAddressData = await addressService.createAddress(addressInput);
@@ -48,7 +47,7 @@ export const CreateAddress = () => {
       if (!newAddressData) {
         return;
       }
-      navigate("hospitals");
+      navigate("..");
     },
     [id, addressService, navigate]
   );

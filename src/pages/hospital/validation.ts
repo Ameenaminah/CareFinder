@@ -6,9 +6,10 @@ export interface HospitalValues {
   ownership: string;
   email?: string;
   phoneNumber: string;
-  website?: string ;
-  about: string;
+  website?: string;
+  about?: string;
   image?: string | undefined;
+  id?: number;
 }
 
 export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup.object().shape({
@@ -19,9 +20,10 @@ export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup.object().sha
     string | undefined
   >,
   phoneNumber: yup.string().required("Required"),
-  website: yup.string().notRequired() as yup.StringSchema<string >,
-  about: yup.string().required("Required"),
+  website: yup.string().notRequired() as yup.StringSchema<string>,
+  about: yup.string().notRequired() as yup.StringSchema<string | undefined>,
   image: yup.string().notRequired() as yup.StringSchema<string | undefined>,
+  id: yup.number().notRequired() as yup.NumberSchema<number>,
 });
 
 export interface AddressValues {

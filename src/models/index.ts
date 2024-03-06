@@ -2,6 +2,7 @@
 export type { CreateUserRequest } from "./requests/createUserRequest";
 export type { CreateHospitalRequest } from "./requests/createHospitalRequest";
 export type { CreateAddressRequest } from "./requests/createAddressRequest";
+export type { UpdateHospitalRequest } from "./requests/updateHospitalRequest";
 
 //Responses
 export { emptyHospitalResponse } from "./responses/hospitalResponse";

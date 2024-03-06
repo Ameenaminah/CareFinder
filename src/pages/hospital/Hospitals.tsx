@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
@@ -8,8 +8,11 @@ import { useInjectedService, useSidebar } from "../../hooks";
 import { SearchForm } from ".";
 import { Spinner } from "../../components";
 import { columns } from "../../data/columns";
+import { useDispatch } from "react-redux";
+import { setHospitals } from "../../state/features/hospital/hospitalSlice";
 
 export const Hospitals = () => {
+  const dispatch = useDispatch();
   const { isSidebarOpen } = useSidebar();
   const { hospitalService } = useInjectedService();
 
@@ -23,13 +26,19 @@ export const Hospitals = () => {
       return await hospitalService.getHospitals();
     },
   });
+  useEffect(() => {
+    if (hospitals) {
+      dispatch(setHospitals(hospitals.items));
+      console.log("here");
+    }
+  }, [dispatch, hospitals]);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
-  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+  const onSelectChange = useCallback((newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
-  };
+  }, []);
 
   const rowSelection = {
     selectedRowKeys,
@@ -59,7 +68,9 @@ export const Hospitals = () => {
               />
             </div>
           ) : (
-            <Spinner />
+            <div className="spinner-container">
+              <Spinner />
+            </div>
           )}
         </div>
       </main>

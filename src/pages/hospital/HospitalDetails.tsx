@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
-import { Drawer, Space } from "antd";
+import { Avatar, Drawer, Space } from "antd";
 import { MdLocationOn, MdEmail, MdOutlineSmartphone } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import { useInjectedService } from "../../hooks";
-import { Spinner } from "../../components";
+import { HospitalError, Spinner } from "../../components";
+import { getInitials } from "../../helpers";
 
 interface Props {}
 export const HospitalDetails: FC<Props> = () => {
@@ -18,7 +19,7 @@ export const HospitalDetails: FC<Props> = () => {
       return await hospitalService.getHospital(Number(id));
     },
   });
-
+  const hospitalDoesNotExist = !isFetching && !hospital;
   return (
     <Drawer
       placement="right"
@@ -26,47 +27,56 @@ export const HospitalDetails: FC<Props> = () => {
       closable={false}
       open
       title={
-        <Space className="detailsHeader">
-          <Link className="closeContainer" to="..">
-            <MdArrowBackIosNew size={20} />
-            <p>Back</p>
-          </Link>
-          <Link to={"edit"}>
-            <button className="button editButton">Edit Hospital</button>
-          </Link>
-        </Space>
+        hospitalDoesNotExist ? (
+          false
+        ) : (
+          <Space className="detailsHeader">
+            <Link className="closeContainer" to="..">
+              <MdArrowBackIosNew size={20} />
+              <p>Back</p>
+            </Link>
+            <Link to={"edit"}>
+              <button className="button editButton">Edit Hospital</button>
+            </Link>
+          </Space>
+        )
       }
       className="hospital-details-container"
       style={{ backgroundColor: "var(--bg-color)" }}
     >
       {!isFetching && hospital ? (
-        <div className="hospitalContent flex">
-          <div className="hospitalImage">
-            <img src={hospital.image} alt="" width={50} />
-          </div>
-          <div>
-            <h2>{hospital?.name}</h2>
-            <div className="flex hospitalContent">
-              <h4>{hospital?.specialization}</h4>
-              <h4>|</h4>
-              <h4>{hospital.ownership}</h4>
+        <div className="hospitalContent ">
+          <div className="hospitalContent flex">
+            <div className="hospitalImage">
+              <Avatar className="avatar">{getInitials(hospital?.name)}</Avatar>
             </div>
-            <div className=" hospitalContactDetails">
-              <div className="flex ">
-                <MdLocationOn size={20} />
-                <p>{hospital.addresses[0]?.addressLine}</p>
+            <div>
+              <h2 className="hospital-name">{hospital?.name}</h2>
+              <div className="flex hospitalContent">
+                <h4>{hospital?.specialization}</h4>
+                <h4>|</h4>
+                <h4>{hospital.ownership}</h4>
               </div>
-              <div className="flex">
-                <MdOutlineSmartphone size={20} />
-                <p>{hospital.phoneNumber}</p>
-              </div>
-              <div className="flex">
-                <MdEmail size={20} />
-                <p>{hospital.email}</p>
+              <div className=" hospitalContactDetails">
+                <div className="flex ">
+                  <MdLocationOn size={20} />
+                  <p>{hospital.addresses[0]?.addressLine}</p>
+                </div>
+                <div className="flex">
+                  <MdOutlineSmartphone size={20} />
+                  <p>{hospital.phoneNumber}</p>
+                </div>
+                <div className="flex">
+                  <MdEmail size={20} />
+                  <p>{hospital.email}</p>
+                </div>
               </div>
             </div>
           </div>
+          <p className="about">{hospital.about}</p>
         </div>
+      ) : hospitalDoesNotExist ? (
+        <HospitalError />
       ) : (
         <Spinner />
       )}

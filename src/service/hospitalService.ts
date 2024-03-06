@@ -5,6 +5,7 @@ import {
   HospitalDetailsResponse,
   HospitalResponse,
   PagedListResponse,
+  UpdateHospitalRequest,
 } from "../models";
 
 export interface IHospitalService {
@@ -13,6 +14,10 @@ export interface IHospitalService {
   createHospital(
     input: CreateHospitalRequest
   ): Promise<HospitalCreatedResponse | null>;
+  updateHospital(
+    input: UpdateHospitalRequest,
+    hospitalId: number
+  ): Promise<void>;
 }
 
 export class HospitalService implements IHospitalService {
@@ -65,5 +70,21 @@ export class HospitalService implements IHospitalService {
     }
 
     return null;
+  }
+
+  async updateHospital(
+    input: UpdateHospitalRequest,
+    hospitalId: number
+  ): Promise<void> {
+    try {
+      const url = `/hospitals/${hospitalId}`;
+
+      return await this.restService.put<void, UpdateHospitalRequest>(
+        url,
+        input
+      );
+    } catch (error) {
+      console.error(`Unable to change Password: ${error}`);
+    }
   }
 }

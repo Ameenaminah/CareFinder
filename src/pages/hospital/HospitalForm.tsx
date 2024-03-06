@@ -1,13 +1,21 @@
-import { FC, useCallback } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Drawer } from "antd";
 import { Input, Spinner } from "../../components";
-import { useInjectedService } from "../../hooks";
+import {
+  useAppSelector,
+  useInjectedService,
+  useHospitalHooks,
+} from "../../hooks";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { HospitalValues, hospitalSchema } from "./validation";
-import { CreateHospitalRequest } from "../../models";
+import {
+  CreateHospitalRequest,
+  HospitalResponse,
+  UpdateHospitalRequest,
+} from "../../models";
 import { LabelContainer } from "../../components/input/LabelContainer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import "./hospital.css";
 
@@ -16,8 +24,16 @@ interface HospitalFormProps {
 }
 
 export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
+  const [selectedHospital, setSelectedHospital] = useState<HospitalResponse>();
   const { hospitalService } = useInjectedService();
+  const { addHospital, updateHospital } = useHospitalHooks();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const {
+    value: { hospitals },
+  } = useAppSelector((s) => s.hospital);
+  console.log(hospitals);
+
   const defaultValue = {
     name: "",
     specialization: "",
@@ -27,17 +43,43 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
     website: "",
     about: "",
     image: "",
+    id: 0,
   };
 
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<HospitalValues>({
     defaultValues: defaultValue,
     resolver: yupResolver(hospitalSchema),
     mode: "onBlur",
   });
+
+  useEffect(() => {
+    if (!isEditMode) {
+      return;
+    }
+
+    const selectedHospital = hospitals.find(
+      (hospital) => hospital.id === Number(id)
+    );
+    setSelectedHospital(selectedHospital);
+  }, [hospitals, id, isEditMode]);
+
+  useEffect(() => {
+    if (!selectedHospital) {
+      return;
+    }
+
+    setValue("name", selectedHospital.name);
+    setValue("specialization", selectedHospital.specialization);
+    setValue("ownership", selectedHospital.ownership);
+    setValue("email", selectedHospital.email);
+    setValue("phoneNumber", selectedHospital.phoneNumber);
+    setValue("website", selectedHospital.website);
+  }, [selectedHospital, setValue]);
 
   const handleAddHospital = useCallback(
     async (formData: HospitalValues) => {
@@ -59,12 +101,23 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       if (!newHospitalData) {
         return;
       }
-      navigate(`../${newHospitalData}/addresses/create`, {
-        state: { newHospitalData },
-        relative: "path",
-      });
+      navigate(`../${newHospitalData}/addresses/create`);
     },
     [hospitalService, navigate]
+  );
+
+  const handleUpdateHospital = useCallback(
+    async (formData: HospitalValues) => {
+      const hospitalInput: UpdateHospitalRequest = {
+        id: Number(id),
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+      };
+
+      await hospitalService.updateHospital(hospitalInput, Number(id));
+      navigate(`../${id}`);
+    },
+    [hospitalService, navigate, id]
   );
 
   return (
@@ -93,6 +146,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             register={register}
             error={errors.name?.message}
             type="text"
+            disabled={isEditMode}
           />
           <Input
             name="phoneNumber"
@@ -107,6 +161,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             register={register}
             error={errors.website?.message}
             type="url"
+            disabled={isEditMode}
           />
           <Input
             name="email"
@@ -121,6 +176,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             register={register}
             error={errors.specialization?.message}
             type="text"
+            disabled={isEditMode}
           />
           <Input
             name="image"
@@ -128,6 +184,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             register={register}
             error={errors.image?.message}
             type="text"
+            disabled={isEditMode}
           />
           <LabelContainer
             name="ownership"
@@ -135,7 +192,11 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             error={errors.image?.message}
           >
             <div className="hospitalFilterContainer ownershipContainer ">
-              <select {...register("ownership")} className="hospitalFilter">
+              <select
+                {...register("ownership")}
+                className="hospitalFilter"
+                disabled={isEditMode}
+              >
                 <option value="" disabled hidden>
                   Select a type
                 </option>
@@ -154,15 +215,18 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
               placeholder="Type your Markdown content here..."
               {...register("about")}
               rows={5}
+              disabled={isEditMode}
             />
           </LabelContainer>
           <div className="button-container">
             <button
               className="button create-button"
               type="submit"
-              onClick={handleSubmit(handleAddHospital)}
+              onClick={handleSubmit(
+                isEditMode ? handleUpdateHospital : handleAddHospital
+              )}
             >
-              {isEditMode ? "Edit " : "Create"}
+              {isEditMode ? "Edit a Hospital " : "Create a Hospital"}
             </button>
           </div>
         </form>
