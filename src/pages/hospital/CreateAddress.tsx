@@ -2,17 +2,26 @@ import { Drawer, Space } from "antd";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Input, Spinner } from "../../components";
-import { useInjectedService } from "../../hooks";
+import {
+  useAppSelector,
+  useHospitalHooks,
+  useInjectedService,
+} from "../../hooks";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AddressValues, addressSchema } from "./validation";
-import { CreateAddressRequest } from "../../models";
+import { CreateAddressRequest, HospitalResponse } from "../../models";
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const CreateAddress = () => {
+  const [selectedHospital, setSelectedHospital] = useState<HospitalResponse>();
+  const { addHospital } = useHospitalHooks();
   const { addressService } = useInjectedService();
   const { id } = useParams();
+  const {
+    value: { hospitals },
+  } = useAppSelector((s) => s.hospital);
 
   const navigate = useNavigate();
 
@@ -33,6 +42,13 @@ export const CreateAddress = () => {
     mode: "onBlur",
   });
 
+  useEffect(() => {
+    const selectedHospital = hospitals.find(
+      (hospital) => hospital.id === Number(id)
+    );
+    setSelectedHospital(selectedHospital);
+  }, [hospitals, id]);
+
   const handleCreateAddressButton = useCallback(
     async (formData: AddressValues) => {
       const addressInput: CreateAddressRequest = {
@@ -47,9 +63,18 @@ export const CreateAddress = () => {
       if (!newAddressData) {
         return;
       }
+
+      const updatedHospital = {
+        id: newAddressData.hospitalId,
+        ...selectedHospital,
+        addresses: [{ ...newAddressData }],
+        
+      };
+    
+      addHospital(updatedHospital);
       navigate("..");
     },
-    [id, addressService, navigate]
+    [id, addressService, navigate, addHospital, selectedHospital]
   );
 
   return (

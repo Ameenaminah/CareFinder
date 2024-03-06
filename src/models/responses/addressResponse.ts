@@ -2,7 +2,8 @@ export interface AddressResponse {
   id: number;
   addressLine: string;
   state: string;
-  postalCode?: string;
+  postalCode?: string | undefined;
+  hospitalId: number;
 }
 
 export const emptyAddressResponse: AddressResponse = {
@@ -10,4 +11,5 @@ export const emptyAddressResponse: AddressResponse = {
   addressLine: "",
   state: "",
   postalCode: "",
+  hospitalId: 0,
 };

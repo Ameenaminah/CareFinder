@@ -4,32 +4,35 @@ export interface HospitalValues {
   name: string;
   specialization: string;
   ownership: string;
-  email?: string;
   phoneNumber: string;
+  email?: string;
   website?: string;
   about?: string;
   image?: string | undefined;
   id?: number;
 }
 
-export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup.object().shape({
-  name: yup.string().required(" Hospital name is required"),
-  specialization: yup.string().required("Specialization is required"),
-  ownership: yup.string().required("Required"),
-  email: yup.string().email("Invalid email").notRequired() as yup.StringSchema<
-    string | undefined
-  >,
-  phoneNumber: yup.string().required("Required"),
-  website: yup.string().notRequired() as yup.StringSchema<string>,
-  about: yup.string().notRequired() as yup.StringSchema<string | undefined>,
-  image: yup.string().notRequired() as yup.StringSchema<string | undefined>,
-  id: yup.number().notRequired() as yup.NumberSchema<number>,
-});
+export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup
+  .object()
+  .shape({
+    name: yup.string().required(" Hospital name is required"),
+    specialization: yup.string().required("Specialization is required"),
+    ownership: yup.string().required("Required"),
+    email: yup
+      .string()
+      .email("Invalid email")
+      .notRequired() as yup.StringSchema<string | undefined>,
+    id: yup.number().required("Required"),
+    phoneNumber: yup.string().required("Required"),
+    website: yup.string().notRequired() as yup.StringSchema<string>,
+    about: yup.string().notRequired() as yup.StringSchema<string | undefined>,
+    image: yup.string().notRequired() as yup.StringSchema<string | undefined>,
+  });
 
 export interface AddressValues {
   addressLine: string;
   state: string;
-  postalCode?: string | undefined;
+  postalCode?: string;
   hospitalId: number;
 }
 
@@ -39,7 +42,5 @@ export const addressSchema: yup.ObjectSchema<AddressValues> = yup
     addressLine: yup.string().required(" AddressLine is required"),
     state: yup.string().required("State is required"),
     hospitalId: yup.number().required("Required"),
-    postalCode: yup.string().notRequired() as yup.StringSchema<
-      string | undefined
-    >,
+    postalCode: yup.string().notRequired() as yup.StringSchema<string>,
   });

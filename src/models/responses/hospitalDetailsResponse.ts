@@ -1,12 +1,16 @@
-import { HospitalResponse, emptyHospitalResponse } from "..";
+import {
+  AddressResponse,
+  CreateHospitalRequest,
+  emptyCreateHospitalRequest,
+} from "..";
 
-export interface HospitalDetailsResponse extends HospitalResponse {
-  image: string;
-  about: string;
+export interface HospitalDetailsResponse extends CreateHospitalRequest {
+  id: number;
+  addresses: AddressResponse[];
 }
 
 export const emptyHospitalDetailsResponse: HospitalDetailsResponse = {
-  ...emptyHospitalResponse,
-  image: "",
-  about: "",
+  ...emptyCreateHospitalRequest,
+  id: 0,
+  addresses: [],
 };

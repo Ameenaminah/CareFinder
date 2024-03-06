@@ -8,3 +8,14 @@ export interface CreateHospitalRequest {
   about: string | undefined;
   image?: string;
 }
+
+export const emptyCreateHospitalRequest: CreateHospitalRequest = {
+  name: "",
+  specialization: "",
+  ownership: "",
+  email: "",
+  phoneNumber: "",
+  website: "",
+  about: "",
+  image: "",
+};

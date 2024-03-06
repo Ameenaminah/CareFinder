@@ -1,3 +1,4 @@
-export interface AddressCreatedResponse {
-  id: number;
+import { AddressResponse } from "..";
+
+export interface AddressCreatedResponse extends AddressResponse {
 }

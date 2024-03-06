@@ -1,11 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { Drawer } from "antd";
 import { Input, Spinner } from "../../components";
-import {
-  useAppSelector,
-  useInjectedService,
-  useHospitalHooks,
-} from "../../hooks";
+import { useAppSelector, useInjectedService } from "../../hooks";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { HospitalValues, hospitalSchema } from "./validation";
@@ -26,13 +22,11 @@ interface HospitalFormProps {
 export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
   const [selectedHospital, setSelectedHospital] = useState<HospitalResponse>();
   const { hospitalService } = useInjectedService();
-  const { addHospital, updateHospital } = useHospitalHooks();
   const navigate = useNavigate();
   const { id } = useParams();
   const {
     value: { hospitals },
   } = useAppSelector((s) => s.hospital);
-  console.log(hospitals);
 
   const defaultValue = {
     name: "",
@@ -98,7 +92,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       if (!newHospitalData) {
         return;
       }
-      navigate(`../${newHospitalData}/addresses/create`);
+      navigate(`../${newHospitalData.id}/addresses/create`);
     },
     [hospitalService, navigate]
   );
