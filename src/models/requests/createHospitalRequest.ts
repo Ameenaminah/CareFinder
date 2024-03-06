@@ -4,8 +4,8 @@ export interface CreateHospitalRequest {
   ownership: string;
   email?: string;
   phoneNumber: string;
-  website: string | undefined;
-  about: string | undefined;
+  website: string ;
+  about: string ;
   image?: string;
 }
 

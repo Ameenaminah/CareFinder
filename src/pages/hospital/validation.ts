@@ -5,10 +5,10 @@ export interface HospitalValues {
   specialization: string;
   ownership: string;
   phoneNumber: string;
-  email?: string;
-  website?: string;
-  about?: string;
-  image?: string | undefined;
+  email: string;
+  website: string;
+  about: string;
+  image: string;
   id?: number;
 }
 
@@ -21,12 +21,12 @@ export const hospitalSchema: yup.ObjectSchema<HospitalValues> = yup
     email: yup
       .string()
       .email("Invalid email")
-      .notRequired() as yup.StringSchema<string | undefined>,
+      .notRequired() as yup.StringSchema<string >,
     id: yup.number().required("Required"),
     phoneNumber: yup.string().required("Required"),
     website: yup.string().notRequired() as yup.StringSchema<string>,
-    about: yup.string().notRequired() as yup.StringSchema<string | undefined>,
-    image: yup.string().notRequired() as yup.StringSchema<string | undefined>,
+    about: yup.string().notRequired() as yup.StringSchema<string>,
+    image: yup.string().notRequired() as yup.StringSchema<string>,
   });
 
 export interface AddressValues {

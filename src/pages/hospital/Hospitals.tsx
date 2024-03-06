@@ -28,7 +28,6 @@ export const Hospitals = () => {
   useEffect(() => {
     if (data) {
       dispatch(setHospitals(data.items));
-      console.log("here");
     }
   }, [dispatch, data]);
 

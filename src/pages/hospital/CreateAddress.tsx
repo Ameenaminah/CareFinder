@@ -68,9 +68,8 @@ export const CreateAddress = () => {
         id: newAddressData.hospitalId,
         ...selectedHospital,
         addresses: [{ ...newAddressData }],
-        
       };
-    
+
       addHospital(updatedHospital);
       navigate("..");
     },
@@ -117,16 +116,11 @@ export const CreateAddress = () => {
             error={errors.postalCode?.message}
             type="text"
           />
-          <Input
-            name="state"
-            label="state"
-            register={register}
-            error={errors.state?.message}
-            type="text"
-          />
-          <button className="button editButton" type="submit">
-            Create Address
-          </button>
+          <div className="button-container">
+            <button className="button" type="submit">
+              Create Address
+            </button>
+          </div>
         </form>
       ) : (
         <Spinner />

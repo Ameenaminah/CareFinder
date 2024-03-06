@@ -2,7 +2,7 @@ export interface AddressResponse {
   id: number;
   addressLine: string;
   state: string;
-  postalCode?: string | undefined;
+  postalCode?: string;
   hospitalId: number;
 }
 
