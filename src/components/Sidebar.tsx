@@ -1,9 +1,8 @@
-import React, { FC } from "react";
-import "./sidebar.css";
+import { FC } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { links } from "../../data/links";
-import { useSidebar } from "../../hooks";
-import { Logo } from "../../assets";
+import { links } from "../data/links";
+import { useSidebar } from "../hooks";
+import { Logo } from "../assets";
 
 interface SidebarProps {}
 
@@ -27,7 +26,7 @@ export const Sidebar: FC<SidebarProps> = () => {
                 }
                 key={id}
               >
-                <div>{React.createElement(icon, { size: "20" })}</div>
+                <div>{icon}</div>
                 <span className="nav-link-name">{link}</span>
               </NavLink>
             ))}

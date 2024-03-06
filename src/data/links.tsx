@@ -1,15 +1,14 @@
-import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
-import { FiShoppingCart } from "react-icons/fi";
 import { GiHospitalCross } from "react-icons/gi";
-import { RiAdminFill } from "react-icons/ri";
+import { IoIosHome } from "react-icons/io";
+import { MdOutlineContactSupport } from "react-icons/md";
+import { CiCircleAlert } from "react-icons/ci";
+import { ReactElement } from "react";
 
 interface Link {
   id: number;
   link: string;
   to: string;
-  icon: React.ComponentType<any>;
+  icon: ReactElement;
 }
 
 const links: Link[] = [
@@ -17,37 +16,37 @@ const links: Link[] = [
     id: 1,
     link: "Home",
     to: ".",
-    icon: MdOutlineDashboard,
+    icon: <IoIosHome size={20} />,
   },
   {
     id: 2,
     link: "Hospitals",
     to: "hospitals",
-    icon: GiHospitalCross,
+    icon: <GiHospitalCross size={20} />,
   },
   {
     id: 3,
     link: "About",
     to: "about",
-    icon: TbReportAnalytics,
+    icon: <CiCircleAlert size={20} />,
   },
   {
     id: 4,
     link: "Contact",
     to: "contact",
-    icon: FiShoppingCart,
+    icon: <MdOutlineContactSupport size={20} />,
   },
   {
     id: 5,
     link: "Reviews",
     to: "reviews",
-    icon: RiSettings4Line,
+    icon: <MdOutlineContactSupport size={20} />,
   },
   {
     id: 6,
     link: "Admin",
     to: "admin",
-    icon: RiAdminFill,
+    icon: <MdOutlineContactSupport size={20} />,
   },
 ];
 

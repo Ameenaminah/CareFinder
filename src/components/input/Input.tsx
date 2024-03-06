@@ -9,7 +9,8 @@ import { LabelContainer } from "./LabelContainer";
 interface Props {
   label: string;
   name: Path<RegisterValues | HospitalValues | AddressValues>;
-  register: UseFormRegister<T>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  register: UseFormRegister<any>;
   error: string | undefined;
   type: string;
   disabled?: boolean;
