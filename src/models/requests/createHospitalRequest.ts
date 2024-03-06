@@ -5,6 +5,6 @@ export interface CreateHospitalRequest {
   email?: string;
   phoneNumber: string;
   website: string | undefined;
-  about: string;
+  about: string | undefined;
   image?: string;
 }
