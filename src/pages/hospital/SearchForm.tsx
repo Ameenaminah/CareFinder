@@ -54,11 +54,15 @@ export const SearchForm = () => {
         <button
           title="Export Hospitals"
           onClick={handleExportFileButton}
-          className="button"
+          className="button hospital-icon-button"
         >
           <CgExport size={20} />
         </button>
-        <Link to="create" title="Share via mail" className="button">
+        <Link
+          to="create"
+          title="Share via mail"
+          className="button hospital-icon-button"
+        >
           <TbMailShare size={20} />
         </Link>
         {isLoggedIn && (

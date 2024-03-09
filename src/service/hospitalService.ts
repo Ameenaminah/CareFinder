@@ -18,6 +18,7 @@ export interface IHospitalService {
     input: UpdateHospitalRequest,
     hospitalId: number
   ): Promise<void>;
+  deleteHospital(hospitalId: number): Promise<void>;
 }
 
 export class HospitalService implements IHospitalService {
@@ -99,6 +100,15 @@ export class HospitalService implements IHospitalService {
       );
     } catch (error) {
       console.error(`Unable to change Password: ${error}`);
+    }
+  }
+
+  async deleteHospital(hospitalId: number): Promise<void> {
+    try {
+      const url = `/hospitals/${hospitalId}`;
+      return await this.authorizedRestService.delete(url);
+    } catch (error) {
+      console.error(`Unable to change delete: ${error}`);
     }
   }
 }
