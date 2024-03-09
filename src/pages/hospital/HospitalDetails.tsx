@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Avatar, Drawer, Space } from "antd";
 import { MdLocationOn, MdEmail, MdOutlineSmartphone } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { useInjectedService } from "../../hooks";
+import { useAppSelector, useInjectedService } from "../../hooks";
 import { HospitalError, Spinner } from "../../components";
 import { getInitials } from "../../helpers";
 
@@ -12,6 +12,7 @@ interface Props {}
 export const HospitalDetails: FC<Props> = () => {
   const { id } = useParams();
   const { hospitalService } = useInjectedService();
+  const { isLoggedIn } = useAppSelector((s) => s.user);
 
   const { data: hospital, isFetching } = useQuery({
     queryKey: ["hospital"],
@@ -35,9 +36,11 @@ export const HospitalDetails: FC<Props> = () => {
               <MdArrowBackIosNew size={20} />
               <p>Back</p>
             </Link>
-            <Link to={"edit"}>
-              <button className="button editButton">Edit Hospital</button>
-            </Link>
+            {isLoggedIn && (
+              <Link to={"edit"}>
+                <button className="button editButton">Edit Hospital</button>
+              </Link>
+            )}
           </Space>
         )
       }

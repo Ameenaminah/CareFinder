@@ -51,19 +51,20 @@ export const Hospitals = () => {
           <hr className="divider" />
           {error && <p>{error.message}</p>}
           {!isLoading && hospitals ? (
-            <div className="hospitalCardsContainer">
+            <div className="hospital-table-container">
               <span style={{ marginLeft: 8 }}>
                 {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
               </span>
               <Table
-                pagination={{ pageSize: 7 }}
+                pagination={{ pageSize: 10, position: ["bottomRight"] }}
                 rowSelection={rowSelection}
                 columns={columns}
                 dataSource={hospitals.map((hospital) => ({
                   ...hospital,
                   key: hospital.id,
                 }))}
-                // size="small"
+                size="small"
+                className="custom-table"
               />
             </div>
           ) : (

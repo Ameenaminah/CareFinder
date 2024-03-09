@@ -21,16 +21,14 @@ export interface IHospitalService {
 }
 
 export class HospitalService implements IHospitalService {
-  constructor(private readonly restService: IRestService) {}
+  constructor(
+    private readonly restService: IRestService,
+    private readonly authorizedRestService: IRestService
+  ) {}
 
   async getHospitals(): Promise<HospitalResponse[] | null> {
     try {
-      const url = `/hospitals?StartIndex=0&PageSize=12&PageNumber=1`;
-      // Add filter query parameter if provided
-      // if (filter) {
-      //   url += `&FilterBy=${filter}`;
-      // }
-
+      const url = "/hospitals";
       const hospitalsResponse = await this.restService.get<
         HospitalResponse[] | null
       >(url);
@@ -95,7 +93,7 @@ export class HospitalService implements IHospitalService {
     try {
       const url = `/hospitals/${hospitalId}`;
 
-      return await this.restService.put<void, UpdateHospitalRequest>(
+      return await this.authorizedRestService.put<void, UpdateHospitalRequest>(
         url,
         input
       );

@@ -1,39 +1,42 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 
 export interface IRestService {
   get<TResponse>(
-    url: string,
-    headers?: Record<string, string>
+    endpoint: string,
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse | null>;
 
   post<TResponse, TData>(
-    url: string,
+    endpoint: string,
     data: TData,
-    headers?: Record<string, string>
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse | null>;
 
   put<TResponse, TData>(
-    url: string,
+    endpoint: string,
     data: TData,
-    headers?: Record<string, string>
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse>;
 
-  delete(url: string, headers?: Record<string, string>): Promise<AxiosResponse>;
-
-  
+  delete(
+    endpoint: string,
+    additionalHeaders?: AxiosRequestHeaders
+  ): Promise<void>;
 }
 
 export class RestService implements IRestService {
   constructor(private readonly baseUrl: string) {}
 
   async get<TResponse>(
-    url: string,
-    headers: Record<string, string>
+    endpoint: string,
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
     try {
-      const fullUrl = this.getFullUrl(url);
+      const url = this.getUrl(endpoint);
 
-      const response = await axios.get<TResponse>(fullUrl, { headers });
+      const response = await axios.get<TResponse>(url, {
+        headers: additionalHeaders,
+      });
 
       return response.data;
     } catch (error) {
@@ -43,14 +46,16 @@ export class RestService implements IRestService {
   }
 
   async post<TResponse, TData>(
-    url: string,
+    endpoint: string,
     data: TData,
-    headers: Record<string, string>
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
     try {
-      const fullUrl = this.getFullUrl(url);
+      const url = this.getUrl(endpoint);
 
-      const response = await axios.post<TResponse>(fullUrl, data, { headers });
+      const response = await axios.post<TResponse>(url, data, {
+        headers: additionalHeaders,
+      });
 
       return response.data;
     } catch (error) {
@@ -60,14 +65,16 @@ export class RestService implements IRestService {
   }
 
   async put<TResponse, TData>(
-    url: string,
+    endpoint: string,
     data: TData,
-    headers: Record<string, string>
+    additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
     try {
-      const fullUrl = this.getFullUrl(url);
+      const url = this.getUrl(endpoint);
 
-      const response = await axios.put<TResponse>(fullUrl, data, { headers });
+      const response = await axios.put<TResponse>(url, data, {
+        headers: additionalHeaders,
+      });
 
       return response.data;
     } catch (error) {
@@ -77,12 +84,12 @@ export class RestService implements IRestService {
   }
 
   async delete(
-    url: string,
-    headers?: Record<string, string>
-  ): Promise<AxiosResponse> {
+    endpoint: string,
+    additionalHeaders?: AxiosRequestHeaders
+  ): Promise<void> {
     try {
-      const fullUrl = this.getFullUrl(url);
-      const response = await axios.delete(fullUrl, { headers });
+      const url = this.getUrl(endpoint);
+      const response = await axios.delete(url, { headers: additionalHeaders });
       return response.data;
     } catch (error) {
       console.log(error);
@@ -90,22 +97,7 @@ export class RestService implements IRestService {
     }
   }
 
-  private getFullUrl(url: string): string {
+  private getUrl(url: string): string {
     return `${this.baseUrl}${url}`;
   }
-
-  // async request(
-  //   method: string,
-  //   url: string,
-  //   data: any,
-  //   headers: Record<string, string> = {}
-  // ): Promise<AxiosResponse> {
-  //   const fullUrl = `${this.baseUrl}${url}`;
-  //   return axios.request({
-  //     method,
-  //     url: fullUrl,
-  //     data,
-  //     headers,
-  //   } as AxiosRequestConfig);
-  // }
 }

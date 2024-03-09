@@ -2,11 +2,12 @@ import { CgExport } from "react-icons/cg";
 import { FaSearch } from "react-icons/fa";
 import { TbMailShare } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { useInjectedService } from "../../hooks";
+import { useAppSelector, useInjectedService } from "../../hooks";
 import { useCallback } from "react";
 
 export const SearchForm = () => {
   const { hospitalService } = useInjectedService();
+  const { isLoggedIn } = useAppSelector((s) => s.user);
 
   const handleExportFileButton = useCallback(async () => {
     const exportResponse = await hospitalService.exportHospitals();
@@ -49,7 +50,6 @@ export const SearchForm = () => {
           </select>
         </div>
       </form>
-      {/* <button className="button searchButton">Add new Hospital</button> */}
       <div className="flex">
         <button
           title="Export Hospitals"
@@ -61,9 +61,11 @@ export const SearchForm = () => {
         <Link to="create" title="Share via mail" className="button">
           <TbMailShare size={20} />
         </Link>
-        <Link to="create" className="button">
-          Add new Hospital
-        </Link>
+        {isLoggedIn && (
+          <Link to="create" className="button">
+            Add new Hospital
+          </Link>
+        )}
       </div>
     </section>
   );
