@@ -92,7 +92,9 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       if (!newHospitalData) {
         return;
       }
-      navigate(`../${newHospitalData.id}/addresses/create`);
+      navigate(`../${newHospitalData.id}/addresses/create`, {
+        state: newHospitalData,
+      });
     },
     [hospitalService, navigate]
   );
@@ -214,10 +216,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             />
           </LabelContainer>
           <div className="button-container">
-            <button
-              className="button create-button"
-              type="submit"
-            >
+            <button className="button create-button" type="submit">
               {isEditMode ? "Edit a Hospital " : "Create a Hospital"}
             </button>
           </div>

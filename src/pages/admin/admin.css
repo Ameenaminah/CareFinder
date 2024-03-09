@@ -34,6 +34,9 @@
 .form-link {
   color: var(--button-color);
 }
+.admin-spinner {
+ margin-top: 50%;
+}
 
 @media screen and (min-width: 1200px) {
   .admin-form {

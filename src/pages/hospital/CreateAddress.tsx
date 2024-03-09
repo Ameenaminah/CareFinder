@@ -1,29 +1,22 @@
 import { Drawer, Space } from "antd";
 import { MdArrowBackIosNew } from "react-icons/md";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Input, Spinner } from "../../components";
-import {
-  useAppSelector,
-  useHospitalHooks,
-  useInjectedService,
-} from "../../hooks";
+import { useHospitalHooks, useInjectedService } from "../../hooks";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AddressValues, addressSchema } from "./validation";
-import { CreateAddressRequest, HospitalResponse } from "../../models";
+import { CreateAddressRequest } from "../../models";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 export const CreateAddress = () => {
-  const [selectedHospital, setSelectedHospital] = useState<HospitalResponse>();
   const { addHospital } = useHospitalHooks();
   const { addressService } = useInjectedService();
-  const { id } = useParams();
-  const {
-    value: { hospitals },
-  } = useAppSelector((s) => s.hospital);
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const hospital = location.state;
+  const { id } = useParams();
 
   const defaultValue = {
     addressLine: "",
@@ -42,13 +35,6 @@ export const CreateAddress = () => {
     mode: "onBlur",
   });
 
-  useEffect(() => {
-    const selectedHospital = hospitals.find(
-      (hospital) => hospital.id === Number(id)
-    );
-    setSelectedHospital(selectedHospital);
-  }, [hospitals, id]);
-
   const handleCreateAddressButton = useCallback(
     async (formData: AddressValues) => {
       const addressInput: CreateAddressRequest = {
@@ -64,16 +50,13 @@ export const CreateAddress = () => {
         return;
       }
 
-      const updatedHospital = {
-        id: newAddressData.hospitalId,
-        ...selectedHospital,
+      addHospital({
+        ...hospital,
         addresses: [{ ...newAddressData }],
-      };
-
-      addHospital(updatedHospital);
+      });
       navigate("..");
     },
-    [id, addressService, navigate, addHospital, selectedHospital]
+    [id, addressService, navigate, addHospital, hospital]
   );
 
   return (

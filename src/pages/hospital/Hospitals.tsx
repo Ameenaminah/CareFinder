@@ -56,7 +56,7 @@ export const Hospitals = () => {
                 {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
               </span>
               <Table
-                pagination={{ pageSize: 10, position: ["bottomRight"] }}
+                pagination={{ pageSize: 8, position: ["bottomRight"] }}
                 rowSelection={rowSelection}
                 columns={columns}
                 dataSource={hospitals.map((hospital) => ({

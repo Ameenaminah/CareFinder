@@ -113,7 +113,7 @@ export const Register: FC = () => {
           </div>
         </form>
       ) : (
-        <div className="spinner-container">
+        <div className="admin-spinner">
           <Spinner />
         </div>
       )}

@@ -44,47 +44,45 @@ export const Login: FC = () => {
 
   return (
     <main className={isSidebarOpen ? "space-toggle" : ""}>
-      <div style={{ position: "relative" }}>
-        {!isSubmitting ? (
-          <form
-            action=""
-            className="admin-form"
-            onSubmit={handleSubmit(loginUserButton)}
-          >
-            <div className="form-title">
-              <h1>Login</h1>
-              <p>Type in your email and password to continue</p>
-            </div>
-            <Input
-              name="email"
-              label="Email Address"
-              register={register}
-              error={errors.email?.message}
-              type="email"
-            />
-            <Input
-              name="password"
-              label="Password"
-              register={register}
-              error={errors.password?.message}
-              type="password"
-            />
-            <div className=" admin-submit-button">
-              <button className="button create-button">Submit</button>
-            </div>
-            <div className="form-link-container">
-              <p>Don't have and account?</p>
-              <Link to={"../../admin/register"} className="form-link">
-                Create Account
-              </Link>
-            </div>
-          </form>
-        ) : (
-          <div className="spinner-container">
-            <Spinner />
+      {!isSubmitting ? (
+        <form
+          action=""
+          className="admin-form"
+          onSubmit={handleSubmit(loginUserButton)}
+        >
+          <div className="form-title">
+            <h1>Login</h1>
+            <p>Type in your email and password to continue</p>
           </div>
-        )}
-      </div>
+          <Input
+            name="email"
+            label="Email Address"
+            register={register}
+            error={errors.email?.message}
+            type="email"
+          />
+          <Input
+            name="password"
+            label="Password"
+            register={register}
+            error={errors.password?.message}
+            type="password"
+          />
+          <div className=" admin-submit-button">
+            <button className="button create-button">Submit</button>
+          </div>
+          <div className="form-link-container">
+            <p>Don't have and account?</p>
+            <Link to={"../../admin/register"} className="form-link">
+              Create Account
+            </Link>
+          </div>
+        </form>
+      ) : (
+        <div className="admin-spinner">
+          <Spinner />
+        </div>
+      )}
     </main>
   );
 };
