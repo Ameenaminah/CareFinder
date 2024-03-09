@@ -4,12 +4,12 @@ import {
   HospitalCreatedResponse,
   HospitalDetailsResponse,
   HospitalResponse,
-  PagedListResponse,
   UpdateHospitalRequest,
 } from "../models";
 
 export interface IHospitalService {
-  getHospitals(): Promise<PagedListResponse<HospitalResponse> | null>;
+  getHospitals(): Promise<HospitalResponse[] | null>;
+  exportHospitals(): Promise<Blob | null>;
   getHospital(id: number | undefined): Promise<HospitalDetailsResponse | null>;
   createHospital(
     input: CreateHospitalRequest
@@ -23,16 +23,32 @@ export interface IHospitalService {
 export class HospitalService implements IHospitalService {
   constructor(private readonly restService: IRestService) {}
 
-  async getHospitals(): Promise<PagedListResponse<HospitalResponse> | null> {
+  async getHospitals(): Promise<HospitalResponse[] | null> {
     try {
       const url = `/hospitals?StartIndex=0&PageSize=12&PageNumber=1`;
+      // Add filter query parameter if provided
+      // if (filter) {
+      //   url += `&FilterBy=${filter}`;
+      // }
 
-      const hospitalsResponse =
-        await this.restService.get<PagedListResponse<HospitalResponse> | null>(
-          url
-        );
+      const hospitalsResponse = await this.restService.get<
+        HospitalResponse[] | null
+      >(url);
 
       return hospitalsResponse;
+    } catch (error) {
+      console.error(`Unable to export CSV: ${error}`);
+    }
+    return null;
+  }
+
+  async exportHospitals(): Promise<Blob | null> {
+    try {
+      const url = "/hospitals/export";
+
+      const exportResponse = await this.restService.get<Blob | null>(url);
+
+      return exportResponse;
     } catch (error) {
       console.error(`unable to get hospitals: ${error}`);
     }

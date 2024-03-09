@@ -20,12 +20,7 @@ export interface IRestService {
 
   delete(url: string, headers?: Record<string, string>): Promise<AxiosResponse>;
 
-  // request<TResponse, TData>(
-  //   method: string,
-  //   url: string,
-  //   data: TData,
-  //   headers?: Record<string, string>
-  // ): Promise<TResponse>;
+  
 }
 
 export class RestService implements IRestService {

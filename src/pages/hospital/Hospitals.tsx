@@ -27,7 +27,7 @@ export const Hospitals = () => {
   });
   useEffect(() => {
     if (data) {
-      dispatch(setHospitals(data.items));
+      dispatch(setHospitals(data));
     }
   }, [dispatch, data]);
 
@@ -56,12 +56,14 @@ export const Hospitals = () => {
                 {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
               </span>
               <Table
+                pagination={{ pageSize: 7 }}
                 rowSelection={rowSelection}
                 columns={columns}
                 dataSource={hospitals.map((hospital) => ({
                   ...hospital,
                   key: hospital.id,
                 }))}
+                // size="small"
               />
             </div>
           ) : (

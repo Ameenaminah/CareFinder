@@ -1,13 +1,19 @@
 import "./navbar.css";
 import { FaBars, FaRegBell } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { useSidebar } from "../../hooks";
+// import { FaSearch } from "react-icons/fa";
+import { useSidebar, useAppSelector } from "../../hooks";
 import { useLocation } from "react-router-dom";
 import { FC } from "react";
+import { Avatar } from "antd";
+import { getInitials } from "../../helpers";
 
-export const Navbar: FC= () => {
+export const Navbar: FC = () => {
   const location = useLocation();
   const { toggleSidebar, isSidebarOpen } = useSidebar();
+  const {
+    isLoggedIn,
+    value: { firstName },
+  } = useAppSelector((s) => s.user);
 
   const path: { [key: string]: string } = {
     "/": "Home",
@@ -23,9 +29,19 @@ export const Navbar: FC= () => {
         <FaBars size={20} className="header-toggle" onClick={toggleSidebar} />
         <span>{path[location.pathname]}</span>
       </div>
-      <div>
-        <FaRegBell />
-        <FaSearch />
+      <div className="avatarContainer">
+        <FaRegBell size={25} />
+        {isLoggedIn && (
+          <div className="flex avatarContainer">
+            <Avatar className="navbar-avatar avatar">
+              {getInitials(firstName)}
+            </Avatar>
+            <div>
+              <p className="firstName">{firstName}</p>
+              <p className="admin">Admin</p>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

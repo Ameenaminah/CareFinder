@@ -12,24 +12,14 @@ interface Link {
 }
 
 const links: Link[] = [
-  {
-    id: 1,
-    link: "Home",
-    to: ".",
-    icon: <IoIosHome size={20} />,
-  },
+  { id: 1, link: "Home", to: ".", icon: <IoIosHome size={20} /> },
   {
     id: 2,
     link: "Hospitals",
     to: "hospitals",
     icon: <GiHospitalCross size={20} />,
   },
-  {
-    id: 3,
-    link: "About",
-    to: "about",
-    icon: <CiCircleAlert size={20} />,
-  },
+  { id: 3, link: "About", to: "about", icon: <CiCircleAlert size={20} /> },
   {
     id: 4,
     link: "Contact",
@@ -40,12 +30,6 @@ const links: Link[] = [
     id: 5,
     link: "Reviews",
     to: "reviews",
-    icon: <MdOutlineContactSupport size={20} />,
-  },
-  {
-    id: 6,
-    link: "Admin",
-    to: "admin",
     icon: <MdOutlineContactSupport size={20} />,
   },
 ];

@@ -1,7 +1,6 @@
 .header-toggle {
   font-size: 1.25rem;
   cursor: pointer;
-  color: var(--main-color);
 }
 .barContainer {
   display: flex;
@@ -11,7 +10,31 @@
 }
 .barContainer span {
   font-size: 1.5rem;
-  color: #374858;
   font-weight: bold;
   font-weight: 500;
+  color: var(--title);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+.navbar-avatar {
+  background-color: var(--button-color);
+  padding: 0.8em;
+}
+.firstName {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #374858;
+}
+.admin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 0.69rem;
+  color: #808080;
 }

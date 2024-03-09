@@ -11,10 +11,11 @@ import {
   Contact,
   Hospitals,
   Reviews,
-  Admin,
   HospitalDetails,
   HospitalForm,
   CreateAddress,
+  Register,
+  Login,
 } from "./pages";
 import { Layout } from "./components";
 
@@ -33,8 +34,12 @@ const router = createBrowserRouter(
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="reviews" element={<Reviews />} />
-        <Route path="admin" element={<Admin />} />
+        <Route path="admin">
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
       </Route>
+      <Route path="logout" />
     </Route>
   )
 );

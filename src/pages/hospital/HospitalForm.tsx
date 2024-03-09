@@ -130,7 +130,11 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       style={{ backgroundColor: "var(--bg-color)" }}
     >
       {!isSubmitting ? (
-        <form onSubmit={handleSubmit(handleAddHospital)}>
+        <form
+          onSubmit={handleSubmit(
+            isEditMode ? handleUpdateHospital : handleAddHospital
+          )}
+        >
           <Input
             name="name"
             label="Hospital Name"
@@ -213,9 +217,6 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
             <button
               className="button create-button"
               type="submit"
-              onClick={handleSubmit(
-                isEditMode ? handleUpdateHospital : handleAddHospital
-              )}
             >
               {isEditMode ? "Edit a Hospital " : "Create a Hospital"}
             </button>

@@ -30,7 +30,7 @@ const columns: TableColumnsType<HospitalResponse> = [
     dataIndex: "id",
     key: "x",
     render: (id) => (
-      <Link to={`${id}`} className="button">
+      <Link title="Details" to={`${id}`} className="button">
         Details
       </Link>
     ),

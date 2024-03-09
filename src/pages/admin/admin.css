@@ -2,13 +2,45 @@
   background-color: var(--white);
   padding: 2em;
   border-radius: 1em;
-  width: 40%;
-  margin: 6em auto;
+  margin: 2em auto;
+  overflow: scroll;
+}
+.form-title {
+  margin-bottom: 1em;
+  color: var(--title);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.form-title p {
+  font-weight: 400;
 }
 .admin-submit-button {
-  width: 100%;
-  padding-inline: 1em;
-  padding-block: 1em;
-  border-radius: 0.3em;
-  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+.create-button {
+  width: 50%;
+}
+.form-link-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-link {
+  color: var(--button-color);
+}
+
+@media screen and (min-width: 1200px) {
+  .admin-form {
+    width: 40%;
+  }
+  .form-link-container {
+    flex-direction: row;
+    gap: 0.5em;
+  }
 }

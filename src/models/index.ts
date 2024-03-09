@@ -1,9 +1,10 @@
 //Requests
-export type { CreateUserRequest } from "./requests/createUserRequest";
+export type { RegisterUserRequest } from "./requests/registerUserRequest";
 export type { CreateHospitalRequest } from "./requests/createHospitalRequest";
 export { emptyCreateHospitalRequest } from "./requests/createHospitalRequest";
 export type { CreateAddressRequest } from "./requests/createAddressRequest";
 export type { UpdateHospitalRequest } from "./requests/updateHospitalRequest";
+export type { UserLoginRequest } from "./requests/userLoginRequest";
 
 //Responses
 export { emptyHospitalResponse } from "./responses/hospitalResponse";
@@ -15,3 +16,5 @@ export type { HospitalDetailsResponse } from "./responses/hospitalDetailsRespons
 export type { PagedListResponse } from "./responses/pagedListResponse";
 export type { HospitalCreatedResponse } from "./responses/hospitalCreatedResponse";
 export type { AddressCreatedResponse } from "./responses/addressCreatedResponse";
+export type { UserToken } from "./responses/userToken";
+export type { UserIdentity } from "./userItentity";

@@ -6,4 +6,5 @@ export { HospitalDetails } from "./hospital/HospitalDetails";
 export { HospitalForm } from "./hospital/HospitalForm";
 export { CreateAddress } from "./hospital/CreateAddress";
 export { Reviews } from "./Reviews";
-export { Admin } from "./admin/Admin";
+export { Login } from "./admin/Login";
+export { Register } from "./admin/Register";
