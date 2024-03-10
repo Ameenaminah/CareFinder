@@ -11,7 +11,7 @@ interface SidebarProps {}
 
 export const Sidebar: FC<SidebarProps> = () => {
   const { isSidebarOpen } = useSidebar();
-  const { isLoggedIn } = useAppSelector((s) => s.user);
+  const { isAuthenticated } = useAppSelector((s) => s.user);
 
   return (
     <aside className={`sidebar ${isSidebarOpen ? "show" : ""}`}>
@@ -35,21 +35,21 @@ export const Sidebar: FC<SidebarProps> = () => {
               </NavLink>
             ))}
             <NavLink
-              to={isLoggedIn ? "logout" : "admin/login"}
+              to={isAuthenticated ? "logout" : "admin/login"}
               className={({ isActive }) =>
                 `${isActive ? "active nav-link" : "nav-link"}`
               }
-              style={isLoggedIn ? { marginTop: "8em" } : { marginTop: 0 }}
+              style={isAuthenticated ? { marginTop: "8em" } : { marginTop: 0 }}
             >
               <div>
-                {isLoggedIn ? (
+                {isAuthenticated ? (
                   <MdLogout size={20} />
                 ) : (
                   <RiAdminFill size={20} />
                 )}
               </div>
               <span className="nav-link-name">
-                {isLoggedIn ? "Logout" : "Admin"}
+                {isAuthenticated ? "Logout" : "Admin"}
               </span>
             </NavLink>
           </nav>

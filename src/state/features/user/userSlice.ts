@@ -5,7 +5,7 @@ import { UserIdentity, UserToken } from "../../../models";
 
 interface UserState {
   value: UserIdentity;
-  isLoggedIn: boolean;
+  isAuthenticated: boolean;
 }
 
 const initialState: UserState = {
@@ -16,7 +16,7 @@ const initialState: UserState = {
     token: "",
     refreshToken: "",
   },
-  isLoggedIn: false,
+  isAuthenticated: false,
 };
 
 const userSlice = createSlice({
@@ -34,15 +34,19 @@ const userSlice = createSlice({
         token: action.payload.token,
         refreshToken: action.payload.refreshToken,
       };
-      state.isLoggedIn = true;
+      state.isAuthenticated = true;
+    },
+    loginFailed(state) {
+      state.value = { ...initialState.value };
+      state.isAuthenticated = false;
     },
     logout(state) {
       state.value = { ...initialState.value };
-      state.isLoggedIn = false;
+      state.isAuthenticated = false;
     },
   },
 });
 
-export const { logout, loginSuccess } = userSlice.actions;
+export const { logout, loginSuccess, loginFailed } = userSlice.actions;
 
 export default userSlice.reducer;

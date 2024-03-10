@@ -17,14 +17,22 @@
   --label-text: #4a5567;
   --border-color: #e3e8ef;
   --gray-500: #7f8f98;
+  --box-shadow: 0.5rem 0.5rem 0 rgba(22, 160, 133, 0.2);
+  --text-shadow: 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.2);
+}
+html {
+  /* overflow: hidden; */
+  scroll-padding-top: 7em;
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--bg-color);
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: "Poppins", sans-serif;
   font-weight: 400;
 }
+
 a {
   text-decoration: none;
   all: unset;
@@ -46,6 +54,7 @@ main {
   display: grid;
   position: relative;
   margin: var(--header-height) 0 0 0;
+   overflow: scroll;
 }
 
 .button {
@@ -177,7 +186,17 @@ button {
   padding-left: calc(var(--nav-width) + 1rem);
 }
 
+@media screen and (max-width: 140px) {
+  body,
+  html {
+    overflow: scroll;
+  }
+}
 @media screen and (min-width: 768px) {
+  body,
+  html {
+    overflow: hidden;
+  }
   main {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
     padding: 0 1rem 0 calc(var(--nav-width) + 2rem);
@@ -200,4 +219,7 @@ button {
   .space-toggle {
     padding-left: calc(var(--nav-width) + 188px);
   }
+}
+
+@media (max-width: 991px) {
 }

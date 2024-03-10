@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { Avatar, Drawer, Space } from "antd";
@@ -7,12 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useAppSelector, useInjectedService } from "../../hooks";
 import { HospitalError, Spinner } from "../../components";
 import { getInitials } from "../../helpers";
+import { MdEdit } from "react-icons/md";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 interface Props {}
 export const HospitalDetails: FC<Props> = () => {
   const { id } = useParams();
   const { hospitalService } = useInjectedService();
-  const { isLoggedIn } = useAppSelector((s) => s.user);
+  const { isAuthenticated } = useAppSelector((s) => s.user);
 
   const { data: hospital, isFetching } = useQuery({
     queryKey: ["hospital"],
@@ -21,6 +23,14 @@ export const HospitalDetails: FC<Props> = () => {
     },
   });
   const hospitalDoesNotExist = !isFetching && !hospital;
+
+  const deleteHospitalButton = useCallback(
+    async (hospitalId: number) => {
+      return await hospitalService.deleteHospital(hospitalId);
+    },
+    [hospitalService]
+  );
+
   return (
     <Drawer
       placement="right"
@@ -32,14 +42,24 @@ export const HospitalDetails: FC<Props> = () => {
           false
         ) : (
           <Space className="detailsHeader">
-            <Link className="closeContainer" to="..">
+            <Link className="closeContainer" to=".." title=" Edit Hospital">
               <MdArrowBackIosNew size={20} />
               <p>Back</p>
             </Link>
-            {isLoggedIn && (
-              <Link to={"edit"}>
-                <button className="button editButton">Edit Hospital</button>
-              </Link>
+            {isAuthenticated && (
+              <div className="flex">
+                <Link to={"edit"} className="button hospital-icon-button">
+                  <MdEdit size={20} />
+                </Link>
+                <button
+                  className="button hospital-icon-button"
+                  style={{ backgroundColor: "#EB5757" }}
+                  title="Delete Hospital"
+                  onClick={() => deleteHospitalButton(Number(id))}
+                >
+                  <RiDeleteBin6Fill size={20} />
+                </button>
+              </div>
             )}
           </Space>
         )
@@ -67,11 +87,17 @@ export const HospitalDetails: FC<Props> = () => {
                 </div>
                 <div className="flex">
                   <MdOutlineSmartphone size={20} />
-                  <p>{hospital.phoneNumber}</p>
+                  <p>
+                    <a href={`tel:+${hospital.phoneNumber}`}>
+                      {hospital.phoneNumber}
+                    </a>
+                  </p>
                 </div>
                 <div className="flex">
                   <MdEmail size={20} />
-                  <p>{hospital.email}</p>
+                  <p>
+                    <a href={`mailto:${hospital.email}`}>{hospital.email}</a>
+                  </p>
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { useCallback } from "react";
 
 export const SearchForm = () => {
   const { hospitalService } = useInjectedService();
-  const { isLoggedIn } = useAppSelector((s) => s.user);
+  const { isAuthenticated } = useAppSelector((s) => s.user);
 
   const handleExportFileButton = useCallback(async () => {
     const exportResponse = await hospitalService.exportHospitals();
@@ -65,7 +65,7 @@ export const SearchForm = () => {
         >
           <TbMailShare size={20} />
         </Link>
-        {isLoggedIn && (
+        {isAuthenticated && (
           <Link to="create" className="button">
             Add new Hospital
           </Link>

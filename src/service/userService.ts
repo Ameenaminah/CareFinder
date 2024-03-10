@@ -1,6 +1,10 @@
 import { IRestService } from "./restService";
 import { UserToken, UserLoginRequest, RegisterUserRequest } from "../models";
-import { loginSuccess, logout } from "../state/features/user/userSlice";
+import {
+  loginFailed,
+  loginSuccess,
+  logout,
+} from "../state/features/user/userSlice";
 import { store } from "../state/store";
 
 export interface IUserService {
@@ -23,6 +27,8 @@ export class UserService implements IUserService {
 
       if (tokenResponse) {
         store.dispatch(loginSuccess(tokenResponse));
+      } else {
+        store.dispatch(loginFailed());
       }
 
       return tokenResponse;

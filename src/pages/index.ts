@@ -1,6 +1,6 @@
 export { About } from "./About";
-export { Contact } from "./Contact";
-export { Home } from "./Home";
+export { Contact } from "./contact/Contact";
+export { Home } from "./home/Home";
 export { Hospitals } from "./hospital/Hospitals";
 export { HospitalDetails } from "./hospital/HospitalDetails";
 export { HospitalForm } from "./hospital/HospitalForm";

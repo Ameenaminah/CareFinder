@@ -1,0 +1,47 @@
+.contact {
+  /* background-image: url("../assets/images/hero5.jpg");
+  background-color: var(--main-bg-color); */
+}
+.contact h2 {
+  margin: 0.5em;
+  font-size: 3rem;
+  text-align: center;
+}
+.contact form {
+  margin: 1em auto;
+  text-align: center;
+  width: 50%;
+  background-color: var(--white);
+  padding: 2em;
+  border-radius: 1em;
+  overflow: scroll;
+}
+.contact form .input-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.contact form .input-box input,
+.contact form textarea {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  background: var(--second-bg-color);
+  border-radius: 0.8rem;
+  margin: 0.5em 0;
+}
+.contact form .input-box input {
+  width: 49%;
+}
+.contact form textarea {
+  resize: none;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.support {
+  color: orange;
+}
