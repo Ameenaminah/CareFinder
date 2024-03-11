@@ -1,7 +1,7 @@
 import { useSidebar } from "../../hooks";
 import { HomeImage } from "../../assets";
 import "./home.css";
-import { FaChevronRight } from "react-icons/fa6";
+import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
@@ -20,8 +20,8 @@ export const Home = () => {
             aliquid! Commodi quos sunt ratione!
           </p>
           <div className="home-button button">
-            <Link to={"../contact"}>Contact us</Link>
-            <FaChevronRight />
+            <Link to={"../hospitals"}>Find Hospital</Link>
+            <IoMdSearch size={20} />
           </div>
         </div>
       </section>

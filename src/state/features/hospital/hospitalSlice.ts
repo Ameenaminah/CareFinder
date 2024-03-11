@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { HospitalResponse } from "../../../models";
+import { HospitalCreatedResponse, HospitalResponse } from "../../../models";
 
 interface HospitalState {
   value: {
@@ -30,9 +30,15 @@ const hospitalSlice = createSlice({
       );
       state.value.hospitals = [action.payload, ...filteredSpaces];
     },
+    deleteHospital: (state, action: PayloadAction<HospitalCreatedResponse>) => {
+      const filteredSpaces = state.value.hospitals.filter(
+        (s) => s.id !== action.payload.id
+      );
+      state.value.hospitals = [...filteredSpaces];
+    },
   },
 });
 
-export const { setHospitals, addHospital, updateHospital } =
+export const { setHospitals, addHospital, updateHospital, deleteHospital } =
   hospitalSlice.actions;
 export default hospitalSlice.reducer;

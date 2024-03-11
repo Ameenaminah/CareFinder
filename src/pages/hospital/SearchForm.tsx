@@ -4,6 +4,7 @@ import { TbMailShare } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useAppSelector, useInjectedService } from "../../hooks";
 import { useCallback } from "react";
+import { message } from "antd";
 
 export const SearchForm = () => {
   const { hospitalService } = useInjectedService();
@@ -13,9 +14,10 @@ export const SearchForm = () => {
     const exportResponse = await hospitalService.exportHospitals();
 
     if (!exportResponse) {
+      message.error("Unable to export Hospitals");
       return;
     }
-
+    message.success("Hospitals list exported");
     const url = window.URL.createObjectURL(new Blob([exportResponse]));
     const link = document.createElement("a");
     link.href = url;

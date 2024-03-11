@@ -1,4 +1,4 @@
-import { Drawer, Space } from "antd";
+import { Drawer, Space, message } from "antd";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Input, Spinner } from "../../components";
@@ -47,9 +47,10 @@ export const CreateAddress = () => {
       const newAddressData = await addressService.createAddress(addressInput);
 
       if (!newAddressData) {
+        message.error("Unable to create hospital");
         return;
       }
-
+      message.success("Hospital created");
       addHospital({
         ...hospital,
         addresses: [{ ...newAddressData }],

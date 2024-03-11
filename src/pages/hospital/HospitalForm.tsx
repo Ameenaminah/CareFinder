@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import { Input, Spinner } from "../../components";
 import { useAppSelector, useInjectedService } from "../../hooks";
 import { useForm } from "react-hook-form";
@@ -90,8 +90,10 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       );
 
       if (!newHospitalData) {
+        message.error("Unable to create hospital");
         return;
       }
+      message.success("Hospital created, please add the address");
       navigate(`../${newHospitalData.id}/addresses/create`, {
         state: newHospitalData,
       });
@@ -108,6 +110,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
       };
 
       await hospitalService.updateHospital(hospitalInput, Number(id));
+      message.success("Hospital updated");
       navigate(`../${id}`);
     },
     [hospitalService, navigate, id]

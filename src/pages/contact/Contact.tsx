@@ -1,92 +1,88 @@
-import { useSidebar } from "../../hooks";
-import { useState } from "react";
-import "./contact.css";
+import { useInjectedService, useSidebar } from "../../hooks";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema, LoginValues } from "../admin/validation";
+import "../admin/admin.css";
+import { Input, Spinner } from "../../components";
+import { FC, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserLoginRequest } from "../../models";
 
-export const Contact = () => {
+export const Contact: FC = () => {
   const { isSidebarOpen } = useSidebar();
+  const { userService } = useInjectedService();
+  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    fullName: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobileNumber: "",
-    subject: "",
-    message: "",
+  const defaultValue = { email: "", password: "" };
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginValues>({
+    defaultValues: defaultValue,
+    resolver: yupResolver(loginSchema),
+    mode: "onBlur",
   });
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
+  const loginUserButton = useCallback(
+    async (formData: LoginValues) => {
+      const LoginUserInput: UserLoginRequest = {
+        email: formData.email,
+        password: formData.password,
       };
-    });
-  }
+      const tokenResult = await userService.login(LoginUserInput);
+
+      if (tokenResult == null) {
+        return;
+      }
+      navigate("/");
+    },
+
+    [userService, navigate]
+  );
 
   return (
     <main className={isSidebarOpen ? "space-toggle" : ""}>
-      <section className="contact">
-        <h2 className="heading">
-          Contact <span>Us!</span>
-        </h2>
+      {!isSubmitting ? (
         <form
-          action="https://getform.io/f/a6ac45b2-9f36-4abd-a7a9-57f4b58b7508"
-          method="POST"
+          action=""
+          className="admin-form"
+          onSubmit={handleSubmit(loginUserButton)}
         >
-          <div className="input-box">
-            <input
-              type="text"
-              placeholder="Full Name"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="email"
-              placeholder="Email Address"
-              onChange={handleChange}
-              name="email"
-              value={formData.email}
-              required
-            />
+          <div className="form-title">
+            <h1>Login</h1>
+            <p>Type in your email and password to continue</p>
           </div>
-          <div className="input-box">
-            <input
-              type="number"
-              placeholder="Mobile Number"
-              name="mobileNumber"
-              value={formData.mobileNumber}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              placeholder="Email Subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <textarea
-            value={formData.message}
-            placeholder="Your Message"
-            onChange={handleChange}
-            name="message"
-            cols={10}
-            rows={3}
-            required
+          <Input
+            name="email"
+            label="Email Address"
+            register={register}
+            error={errors.email?.message}
+            type="email"
           />
-          <div className="btn ">
-            <input type="submit" className=" button" value="Send Message" />
+          <Input
+            name="password"
+            label="Password"
+            register={register}
+            error={errors.password?.message}
+            type="password"
+          />
+          <div className=" admin-submit-button">
+            <button className="button create-button">Submit</button>
+          </div>
+          <div className="form-link-container">
+            <p>Don't have and account?</p>
+            <Link to={"../../admin/register"} className="form-link">
+              Create Account
+            </Link>
           </div>
         </form>
-      </section>
+      ) : (
+        <div className="admin-spinner">
+          <Spinner />
+        </div>
+      )}
     </main>
   );
 };

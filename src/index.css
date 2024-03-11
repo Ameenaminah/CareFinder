@@ -54,7 +54,7 @@ main {
   display: grid;
   position: relative;
   margin: var(--header-height) 0 0 0;
-   overflow: scroll;
+  overflow: scroll;
 }
 
 .button {
@@ -186,7 +186,7 @@ button {
   padding-left: calc(var(--nav-width) + 1rem);
 }
 
-@media screen and (max-width: 140px) {
+@media screen and (max-width: 1400px) {
   body,
   html {
     overflow: scroll;
@@ -195,7 +195,7 @@ button {
 @media screen and (min-width: 768px) {
   body,
   html {
-    overflow: hidden;
+    overflow: scroll;
   }
   main {
     margin: calc(var(--header-height) + 1rem) 0 0 0;

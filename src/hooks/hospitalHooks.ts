@@ -1,15 +1,17 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { HospitalResponse } from "../models";
+import { HospitalCreatedResponse, HospitalResponse } from "../models";
 import {
   addHospital,
   updateHospital,
+  deleteHospital,
 } from "../state/features/hospital/hospitalSlice";
 
 interface HospitalHooksFunctions {
   addHospital: (newFarmData: HospitalResponse) => void;
   updateHospital: (newFarmSpaceData: HospitalResponse) => void;
+  deleteHospital: (newFarmSpaceData: HospitalCreatedResponse) => void;
 }
 
 export const useHospitalHooks = (): HospitalHooksFunctions => {
@@ -29,8 +31,16 @@ export const useHospitalHooks = (): HospitalHooksFunctions => {
     [dispatch]
   );
 
+  const deleteHospitalAction = useCallback(
+    (deleteDataHospital: HospitalCreatedResponse) => {
+      dispatch(deleteHospital(deleteDataHospital));
+    },
+    [dispatch]
+  );
+
   return {
     addHospital: addHospitalAction,
     updateHospital: updateHospitalAction,
+    deleteHospital: deleteHospitalAction,
   };
 };
