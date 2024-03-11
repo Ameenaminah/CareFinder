@@ -101,7 +101,9 @@ export const HospitalDetails: FC<Props> = () => {
                 </Avatar>
               </div>
               <div>
-                <h2 className="hospital-name">{hospital?.name}</h2>
+                <h2 className="hospital-name">
+                  {hospital?.name.toUpperCase()}
+                </h2>
                 <div className="flex hospitalContent">
                   <h4>{hospital?.specialization}</h4>
                   <h4>|</h4>
@@ -110,7 +112,15 @@ export const HospitalDetails: FC<Props> = () => {
                 <div className=" hospitalContactDetails">
                   <div className="flex ">
                     <MdLocationOn size={20} />
-                    <p>{hospital.addresses[0]?.addressLine}</p>
+                    <p>
+                      <a
+                        href={`https://www.google.com/maps/place/${hospital.addresses[0].addressLine
+                          .split(" ")
+                          .join("+")}`}
+                      >
+                        {hospital.addresses[0]?.addressLine}
+                      </a>
+                    </p>
                   </div>
                   <div className="flex">
                     <MdOutlineSmartphone size={20} />
