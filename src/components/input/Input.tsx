@@ -5,10 +5,11 @@ import { FC } from "react";
 import { RegisterValues } from "../../pages/admin/validation";
 import { AddressValues, HospitalValues } from "../../pages/hospital/validation";
 import { LabelContainer } from "./LabelContainer";
+import { ContactValues } from "../../pages/contact/validation";
 
 interface Props {
   label: string;
-  name: Path<RegisterValues | HospitalValues | AddressValues>;
+  name: Path<RegisterValues | HospitalValues | AddressValues | ContactValues>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   error: string | undefined;
