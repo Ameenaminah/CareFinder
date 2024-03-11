@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { links } from "../data/links";
-import { useSidebar } from "../hooks";
+import { useSidebar, useInjectedService } from "../hooks";
 import { Logo } from "../assets";
 import { RiAdminFill } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
@@ -12,6 +12,10 @@ interface SidebarProps {}
 export const Sidebar: FC<SidebarProps> = () => {
   const { isSidebarOpen } = useSidebar();
   const { isAuthenticated } = useAppSelector((s) => s.user);
+  const { userService } = useInjectedService();
+  const logOut = useCallback(async () => {
+    isAuthenticated && (await userService.logout());
+  }, [userService, isAuthenticated]);
 
   return (
     <aside className={`sidebar ${isSidebarOpen ? "show" : ""}`}>
@@ -40,6 +44,7 @@ export const Sidebar: FC<SidebarProps> = () => {
                 `${isActive ? "active nav-link" : "nav-link"}`
               }
               style={isAuthenticated ? { marginTop: "8em" } : { marginTop: 0 }}
+              onClick={logOut}
             >
               <div>
                 {isAuthenticated ? (

@@ -36,6 +36,7 @@ body {
 a {
   text-decoration: none;
   all: unset;
+  cursor: pointer;
 }
 a:visited,
 a:active,

@@ -34,7 +34,7 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
     ownership: "",
     email: "",
     phoneNumber: "",
-    website: "",
+    website: "https://www.google.com/",
     about: "",
     image: "",
     id: 0,

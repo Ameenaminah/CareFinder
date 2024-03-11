@@ -1,5 +1,6 @@
 import "./index.css";
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -39,7 +40,7 @@ const router = createBrowserRouter(
           <Route path="register" element={<Register />} />
         </Route>
       </Route>
-      <Route path="logout" />
+      <Route path="logout" element={<Navigate to="/admin/login" />} />
     </Route>
   )
 );

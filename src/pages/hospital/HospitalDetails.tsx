@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Drawer, Space, message } from "antd";
 import { MdLocationOn, MdEmail, MdOutlineSmartphone } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import { PiGlobeBold } from "react-icons/pi";
 import {
   useAppSelector,
   useInjectedService,
@@ -123,6 +124,12 @@ export const HospitalDetails: FC<Props> = () => {
                     <MdEmail size={20} />
                     <p>
                       <a href={`mailto:${hospital.email}`}>{hospital.email}</a>
+                    </p>
+                  </div>
+                  <div className="flex">
+                    <PiGlobeBold size={20} />
+                    <p>
+                      <a href={hospital.website}>Visit website</a>
                     </p>
                   </div>
                 </div>
