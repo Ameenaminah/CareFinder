@@ -9,6 +9,7 @@ label {
   border-radius: 0.3rem;
   border: 1px solid var(--border-color);
   margin-top: 0.3em;
+  /* position: relative; */
 }
 .input:active,
 .input:focus {
@@ -20,4 +21,9 @@ label {
   margin-bottom: 1.5em;
   margin-left: 0.5em;
   color: red;
+}
+.eye-icon {
+  position: absolute;
+  right: 1em;
+  top: 1em;
 }

@@ -5,7 +5,7 @@ export const Reviews = () => {
 
   return (
     <main className={isSidebarOpen ? "space-toggle" : ""}>
-      <h1>Reviews</h1>
+      <h1 style={{ textAlign: "center", marginTop: "3em" }}>Coming soon...</h1>
     </main>
   );
 };
