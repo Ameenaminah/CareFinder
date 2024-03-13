@@ -70,6 +70,8 @@ export const HospitalForm: FC<HospitalFormProps> = ({ isEditMode }) => {
     setValue("name", selectedHospital.name);
     setValue("specialization", selectedHospital.specialization);
     setValue("ownership", selectedHospital.ownership);
+    setValue("email", selectedHospital.email);
+    setValue("phoneNumber", selectedHospital.phoneNumber);
   }, [selectedHospital, setValue]);
 
   const handleAddHospital = useCallback(
