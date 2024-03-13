@@ -6,7 +6,7 @@ import { UserService } from "../userService";
 import { AuthorizedRestService } from "../authorizedRestService";
 
 export const createServices = (): IInjectedServices => {
-  const webApiRestService = new RestService("http://localhost:5026/api");
+  const webApiRestService = new RestService("https://care-finder-api.azurewebsites.net/api/");
   const webApiAuthorizedRestService = new AuthorizedRestService();
 
   const userService = new UserService(webApiRestService);

@@ -14,14 +14,17 @@ describe("Hospital home page", () => {
     expect(header).toBeVisible();
   });
   
-  it("should display a navigation link to hospitals page", () => {
+  it("should display a navigation link to hospitals page", async () => {
     render(
       <TestWrapper>
         <Home/>
       </TestWrapper>
     ); 
 
-    const findButton = screen.getByText(/Find Hospital/i).closest('a');
+    const findButton = screen.getByText(/Find Hospital/i).closest('a')!;
+
+    // await fireEvent.click(findButton);
+
     expect(findButton).toBeVisible;
     expect(findButton).toHaveAttribute('href', '/hospitals');
   });

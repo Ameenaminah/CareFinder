@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { HomeImage } from "../assets";
 import { useSidebar } from "../hooks";
-import { IoMdSearch } from "react-icons/io";
+// import { IoMdSearch } from "react-icons/io";
 import "./home/home.css";
 
 export const About = () => {
