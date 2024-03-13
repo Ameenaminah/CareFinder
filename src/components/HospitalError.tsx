@@ -10,7 +10,7 @@ export const HospitalError = () => {
           Add new Hospital
         </Link>
         <Link to={"../../hospitals"} className="button">
-          Bact to Hospitals
+          Back to Hospitals
         </Link>
       </div>
     </section>
