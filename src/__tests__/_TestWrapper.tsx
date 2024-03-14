@@ -5,18 +5,15 @@ import { SidebarProvider } from "../context/SidebarContext.tsx";
 import { MemoryRouter } from "react-router-dom";
 
 type Props = {
-    children: ReactNode
-}
+	children: ReactNode;
+};
 
-export const TestWrapper: React.FC<Props> = ({children}) => {
-    return ( 
-        <Provider store={store}>
-            <SidebarProvider>
-                <MemoryRouter>
-                    {children}
-                </MemoryRouter>
-            </SidebarProvider>
-        </Provider>
-     );
-}
- 
+export const TestWrapper: React.FC<Props> = ({ children }) => {
+	return (
+		<Provider store={store}>
+			<SidebarProvider>
+				<MemoryRouter>{children}</MemoryRouter>
+			</SidebarProvider>
+		</Provider>
+	);
+};

@@ -3,104 +3,89 @@ import { RestService } from "./restService";
 import { store } from "../state/store";
 
 export class AuthorizedRestService extends RestService {
-  constructor(url: string) {
-    super(url);
-  }
+	constructor(url: string) {
+		super(url);
+	}
 
-  async get<TResponse>(
-    endpoint: string,
-    additionalHeaders?: AxiosRequestHeaders
-  ): Promise<TResponse> {
-    try {
-      const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+	async get<TResponse>(
+		endpoint: string,
+		additionalHeaders?: AxiosRequestHeaders,
+	): Promise<TResponse> {
+		try {
+			const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 
-      additionalHeaders = this.getDefaultHeaders(
-        authorizationHeaderToken,
-        additionalHeaders
-      );
+			additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
 
-      return await super.get(endpoint, additionalHeaders);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
+			return await super.get(endpoint, additionalHeaders);
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	}
 
-  async post<TResponse, TData>(
-    endpoint: string,
-    data: TData,
-    additionalHeaders?: AxiosRequestHeaders
-  ): Promise<TResponse> {
-    try {
-      const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+	async post<TResponse, TData>(
+		endpoint: string,
+		data: TData,
+		additionalHeaders?: AxiosRequestHeaders,
+	): Promise<TResponse> {
+		try {
+			const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 
-      additionalHeaders = this.getDefaultHeaders(
-        authorizationHeaderToken,
-        additionalHeaders
-      );
+			additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
 
-      return await super.post(endpoint, data, additionalHeaders);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
+			return await super.post(endpoint, data, additionalHeaders);
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	}
 
-  async put<TResponse, TData>(
-    endpoint: string,
-    data: TData,
-    additionalHeaders?: AxiosRequestHeaders
-  ): Promise<TResponse> {
-    try {
-      const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+	async put<TResponse, TData>(
+		endpoint: string,
+		data: TData,
+		additionalHeaders?: AxiosRequestHeaders,
+	): Promise<TResponse> {
+		try {
+			const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 
-      additionalHeaders = this.getDefaultHeaders(
-        authorizationHeaderToken,
-        additionalHeaders
-      );
+			additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
 
-      return await super.put(endpoint, data, additionalHeaders);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
+			return await super.put(endpoint, data, additionalHeaders);
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	}
 
-  async delete(
-    endpoint: string,
-    additionalHeaders?: AxiosRequestHeaders
-  ): Promise<void> {
-    const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
-    if (!authorizationHeaderToken) {
-      return;
-    }
+	async delete(endpoint: string, additionalHeaders?: AxiosRequestHeaders): Promise<void> {
+		const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+		if (!authorizationHeaderToken) {
+			return;
+		}
 
-    additionalHeaders = this.getDefaultHeaders(
-      authorizationHeaderToken,
-      additionalHeaders
-    );
+		additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
 
-    return await super.delete(endpoint, additionalHeaders);
-  }
+		return await super.delete(endpoint, additionalHeaders);
+	}
 
-  private getDefaultHeaders(
-    authorizationHeaderToken: string | null,
-    additionalHeaders?: AxiosRequestHeaders
-  ): AxiosRequestHeaders {
-    additionalHeaders ??= new AxiosHeaders();
+	private getDefaultHeaders(
+		authorizationHeaderToken: string | null,
+		additionalHeaders?: AxiosRequestHeaders,
+	): AxiosRequestHeaders {
+		additionalHeaders ??= new AxiosHeaders();
 
-    additionalHeaders.Authorization = authorizationHeaderToken;
-    additionalHeaders.Accept = "application/json";
+		additionalHeaders.Authorization = authorizationHeaderToken;
+		additionalHeaders.Accept = "application/json";
 
-    return additionalHeaders;
-  }
+		return additionalHeaders;
+	}
 
-  private async getAuthorizationHeaderToken(): Promise<string | null> {
-    const token = await store.getState()?.user?.value.token;
-    if (!token) {
-      return null;
-    }
+	private async getAuthorizationHeaderToken(): Promise<string | null> {
+		const token = await store.getState()?.user?.value.token;
+		if (!token) {
+			return null;
+		}
 
-    return "Bearer " + token;
-  }
+		return "Bearer " + token;
+	}
 }

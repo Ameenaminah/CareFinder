@@ -1,5 +1,5 @@
 export interface UserToken {
-  token: string;
-  refreshToken: string;
-  userId: string;
+	token: string;
+	refreshToken: string;
+	userId: string;
 }

@@ -1,20 +1,20 @@
 .contact h2 {
-  font-size: 40px;
-  color: var(--title);
-  text-align: center;
-  margin-bottom: 10px;
+	font-size: 40px;
+	color: var(--title);
+	text-align: center;
+	margin-bottom: 10px;
 }
 .contact form {
-  width: 50%;
+	width: 50%;
 }
 
 .contact-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 2em;
+	display: flex;
+	justify-content: center;
+	margin-top: 2em;
 }
 textarea:hover,
 textarea:active,
 textarea:focus {
-  border-color: var(--border-color);
+	border-color: var(--border-color);
 }

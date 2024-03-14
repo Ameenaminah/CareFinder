@@ -7,17 +7,17 @@ import { AddressValues, HospitalValues } from "../../pages/hospital/validation";
 import { ContactValues } from "../../pages/contact/validation";
 
 interface Props {
-  label: string;
-  name: Path<RegisterValues | HospitalValues | AddressValues | ContactValues>;
-  error: string | undefined;
-  children: ReactNode;
+	label: string;
+	name: Path<RegisterValues | HospitalValues | AddressValues | ContactValues>;
+	error: string | undefined;
+	children: ReactNode;
 }
 export const LabelContainer: FC<Props> = ({ name, error, label, children }) => {
-  return (
-    <div className="form-control">
-      <label htmlFor={name}>{label}</label>
-      {children}
-      <p className="error">{error}</p>
-    </div>
-  );
+	return (
+		<div className="form-control">
+			<label htmlFor={name}>{label}</label>
+			{children}
+			<p className="error">{error}</p>
+		</div>
+	);
 };

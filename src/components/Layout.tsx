@@ -3,11 +3,11 @@ import { Sidebar } from "./Sidebar";
 import { Navbar } from "./navbar/Navbar";
 
 export const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Sidebar />
-      <Outlet />
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Sidebar />
+			<Outlet />
+		</>
+	);
 };

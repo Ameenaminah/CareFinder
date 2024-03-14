@@ -1,5 +1,5 @@
 export interface UpdateHospitalRequest {
-  id: number;
-  email?: string;
-  phoneNumber?: string;
+	id: number;
+	email?: string;
+	phoneNumber?: string;
 }

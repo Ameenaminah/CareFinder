@@ -3,7 +3,7 @@ import { IHospitalService } from "../hospitalService";
 import { IUserService } from "../userService";
 
 export interface IInjectedServices {
-  hospitalService: IHospitalService;
-  addressService: IAddressService;
-  userService: IUserService;
+	hospitalService: IHospitalService;
+	addressService: IAddressService;
+	userService: IUserService;
 }

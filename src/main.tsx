@@ -14,17 +14,17 @@ const services = createServices();
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <SidebarProvider>
-        <QueryClientProvider client={queryClient}>
-          <ServicesProvider services={services}>
-            <PersistGate loading={null} persistor={persistor}>
-              <App />
-            </PersistGate>
-          </ServicesProvider>
-        </QueryClientProvider>
-      </SidebarProvider>
-    </Provider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<Provider store={store}>
+			<SidebarProvider>
+				<QueryClientProvider client={queryClient}>
+					<ServicesProvider services={services}>
+						<PersistGate loading={null} persistor={persistor}>
+							<App />
+						</PersistGate>
+					</ServicesProvider>
+				</QueryClientProvider>
+			</SidebarProvider>
+		</Provider>
+	</React.StrictMode>,
 );

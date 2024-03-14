@@ -1,183 +1,183 @@
 .hospitalContainer {
-  background-color: var(--white);
-  border-radius: 1em;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: calc(90vh - 4.5em);
-  width: 95%;
-  margin: 2em auto;
-  position: relative;
+	background-color: var(--white);
+	border-radius: 1em;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	height: calc(90vh - 4.5em);
+	width: 95%;
+	margin: 2em auto;
+	position: relative;
 }
 .flex {
-  display: flex;
-  flex-direction: row;
-  gap: 0.2rem;
+	display: flex;
+	flex-direction: row;
+	gap: 0.2rem;
 }
 .spinner-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 }
 
 /* SearchForm */
 .search-form-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .searchForm {
-  gap: 1rem;
-  display: flex;
+	gap: 1rem;
+	display: flex;
 }
 .searchButton {
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.3rem;
 }
 .searchInputContainer {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 1rem;
-  gap: 0.3rem;
-  border: 1px solid none;
-  padding-inline: 0.5rem;
-  padding-block: 0.7rem;
-  width: 100%;
-  background-color: #ebf5ff;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-radius: 1rem;
+	gap: 0.3rem;
+	border: 1px solid none;
+	padding-inline: 0.5rem;
+	padding-block: 0.7rem;
+	width: 100%;
+	background-color: #ebf5ff;
 }
 .searchInput {
-  background-color: #ebf5ff;
-  color: #969696;
+	background-color: #ebf5ff;
+	color: #969696;
 }
 .searchInput,
 .searchButton:focus,
 .searchButton:hover,
 .hospitalFilter {
-  border: none;
-  outline: none;
+	border: none;
+	outline: none;
 }
 .hospitalFilterContainer {
-  border-radius: 1em;
-  border: 1px solid var(--button-color);
-  background-color: var(--white);
-  padding-inline: 0.5rem;
-  padding-block: 0.7rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	border-radius: 1em;
+	border: 1px solid var(--button-color);
+	background-color: var(--white);
+	padding-inline: 0.5rem;
+	padding-block: 0.7rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .hospitalFilter {
-  border: none;
-  outline: none;
+	border: none;
+	outline: none;
 }
 
 /* hospital-table-container */
 .hospital-table-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  overflow: scroll;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	overflow: scroll;
+	position: relative;
 }
 .custom-table .ant-pagination {
-  position: fixed;
-  bottom: 3.5em;
-  right: 5em;
+	position: fixed;
+	bottom: 3.5em;
+	right: 5em;
 }
 
 /* HospitalDetails.css */
 .closeContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  gap: 0.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	gap: 0.5em;
 }
 .detailsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 .hospital-name {
-  color: var(--title);
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
+	color: var(--title);
+	font-family: "Poppins", sans-serif;
+	font-weight: 600;
 }
 
 .hospitalContent {
-  align-items: center;
-  gap: 1em;
-  color: var(--title);
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
+	align-items: center;
+	gap: 1em;
+	color: var(--title);
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
 }
 h4 {
-  color: var(--title);
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
+	color: var(--title);
+	font-family: "Poppins", sans-serif;
+	font-weight: 500;
 }
 .hospitalImage {
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  background-color: var(--text-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-color: var(--text-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
 }
 .hospitalContactDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  margin-block-start: 1.5em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	margin-block-start: 1.5em;
 }
 .about {
-  text-align: justify;
-  margin-top: 6em;
+	text-align: justify;
+	margin-top: 6em;
 }
 
 /* CreateHospital */
 .hospital-form {
-  background-color: var(--text-color);
-  padding: 2em;
-  border-radius: 1em;
-  width: 50%;
-  margin: 3em auto;
-  height: 60vh;
-  overflow: scroll;
+	background-color: var(--text-color);
+	padding: 2em;
+	border-radius: 1em;
+	width: 50%;
+	margin: 3em auto;
+	height: 60vh;
+	overflow: scroll;
 }
 
 /* HospitalForm */
 .close-form {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: var(--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: var(--white);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 textarea {
-  resize: none;
-  display: flex;
-  margin-top: 0.5em;
-  width: 100%;
+	resize: none;
+	display: flex;
+	margin-top: 0.5em;
+	width: 100%;
 }
 .ownershipContainer {
-  width: 30%;
-  margin-top: 0.5em;
+	width: 30%;
+	margin-top: 0.5em;
 }
 .button-container {
-  display: flex;
-  justify-content: center;
-  align-self: center;
+	display: flex;
+	justify-content: center;
+	align-self: center;
 }
 .create-button {
-  width: 50%;
+	width: 50%;
 }

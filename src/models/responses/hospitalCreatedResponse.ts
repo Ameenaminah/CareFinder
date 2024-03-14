@@ -1,3 +1,3 @@
 export interface HospitalCreatedResponse {
-  id: number;
+	id: number;
 }

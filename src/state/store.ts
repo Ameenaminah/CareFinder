@@ -5,17 +5,17 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 
 const persistConfig = {
-  key: "root",
-  storage,
+	key: "root",
+	storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, userSlice);
 
 export const store = configureStore({
-  reducer: {
-    hospital: hospitalSlice,
-    user: persistedReducer,
-  },
+	reducer: {
+		hospital: hospitalSlice,
+		user: persistedReducer,
+	},
 });
 
 export const persistor = persistStore(store);
