@@ -12,3 +12,15 @@
   gap: 2em;
   margin-top: 2em;
 }
+
+/* Not Found */
+.not-found-image {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+}
+.not-found-text {
+  text-align: center;
+  margin-bottom: 0.5em;
+  padding: 2em;
+}
