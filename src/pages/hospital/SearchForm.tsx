@@ -28,6 +28,16 @@ export const SearchForm = () => {
     document.body.removeChild(link);
   }, [hospitalService]);
 
+  const handleShareFileButton = useCallback(async () => {
+    const exportResponse = await hospitalService.shareHospitals();
+
+    if (!exportResponse) {
+      message.error("Unable to export Hospitals");
+      return;
+    }
+    message.success("Hospitals list exported");
+  }, [hospitalService]);
+
   return (
     <section className="search-form-container">
       <form action="" className="searchForm ">
@@ -60,13 +70,13 @@ export const SearchForm = () => {
         >
           <CgExport size={20} />
         </button>
-        <Link
-          to="create"
+        <button
           title="Share via mail"
+          onClick={handleShareFileButton}
           className="button hospital-icon-button"
         >
           <TbMailShare size={20} />
-        </Link>
+        </button>
         {isAuthenticated && (
           <Link to="create" className="button">
             Add new Hospital

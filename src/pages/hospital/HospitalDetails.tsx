@@ -96,16 +96,14 @@ export const HospitalDetails: FC<Props> = () => {
           <div className="hospitalContent ">
             <div className="hospitalContent flex">
               <div className="hospitalImage">
-                <Avatar className="avatar">
-                  {getInitials(hospital?.name)}
-                </Avatar>
+                <Avatar className="avatar">{getInitials(hospital.name)}</Avatar>
               </div>
               <div>
                 <h2 className="hospital-name">
                   {hospital?.name.toUpperCase()}
                 </h2>
                 <div className="flex hospitalContent">
-                  <h4>{hospital?.specialization}</h4>
+                  <h4>{hospital.specialization}</h4>
                   <h4>|</h4>
                   <h4>{hospital.ownership}</h4>
                 </div>
@@ -114,9 +112,10 @@ export const HospitalDetails: FC<Props> = () => {
                     <MdLocationOn size={20} />
                     <p>
                       <a
-                        href={`https://www.google.com/maps/place/${hospital.addresses[0].addressLine
+                        href={`https://www.google.com/maps/place/${hospital.addresses[0]?.addressLine
                           .split(" ")
                           .join("+")}`}
+                        target="blank"
                       >
                         {hospital.addresses[0]?.addressLine}
                       </a>
@@ -125,7 +124,7 @@ export const HospitalDetails: FC<Props> = () => {
                   <div className="flex">
                     <MdOutlineSmartphone size={20} />
                     <p>
-                      <a href={`tel:+${hospital.phoneNumber}`}>
+                      <a href={`tel:+${hospital.phoneNumber}`} target="blank">
                         {hospital.phoneNumber}
                       </a>
                     </p>
@@ -133,13 +132,17 @@ export const HospitalDetails: FC<Props> = () => {
                   <div className="flex">
                     <MdEmail size={20} />
                     <p>
-                      <a href={`mailto:${hospital.email}`}>{hospital.email}</a>
+                      <a href={`mailto:${hospital.email}`} target="blank">
+                        {hospital.email}
+                      </a>
                     </p>
                   </div>
                   <div className="flex">
                     <PiGlobeBold size={20} />
                     <p>
-                      <a href={hospital.website}>Visit website</a>
+                      <a href={hospital.website} target="blank">
+                        Visit website
+                      </a>
                     </p>
                   </div>
                 </div>

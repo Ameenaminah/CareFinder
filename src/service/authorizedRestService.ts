@@ -3,25 +3,14 @@ import { RestService } from "./restService";
 import { store } from "../state/store";
 
 export class AuthorizedRestService extends RestService {
-  constructor() {
-    super("http://localhost:5026/api");
+  constructor(url: string) {
+    super(url);
   }
 
   async get<TResponse>(
     endpoint: string,
     additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
-    // const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
-    // if (!authorizationHeaderToken) {
-    //   return null;
-    // }
-
-    // additionalHeaders = this.getDefaultHeaders(
-    //   authorizationHeaderToken,
-    //   additionalHeaders
-    // );
-
-    // return await super.get(endpoint, additionalHeaders);
     try {
       const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 
@@ -42,18 +31,6 @@ export class AuthorizedRestService extends RestService {
     data: TData,
     additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
-    // const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
-    // if (!authorizationHeaderToken) {
-    //   return null;
-    // }
-
-    // additionalHeaders = this.getDefaultHeaders(
-    //   authorizationHeaderToken,
-    //   additionalHeaders
-    // );
-
-    // return await super.post(endpoint, data, additionalHeaders);
-
     try {
       const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 
@@ -74,18 +51,6 @@ export class AuthorizedRestService extends RestService {
     data: TData,
     additionalHeaders?: AxiosRequestHeaders
   ): Promise<TResponse> {
-    // const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
-    // if (!authorizationHeaderToken) {
-    //   return null;
-    // }
-
-    // additionalHeaders = this.getDefaultHeaders(
-    //   authorizationHeaderToken,
-    //   additionalHeaders
-    // );
-
-    // return await super.put(endpoint, data, additionalHeaders);
-
     try {
       const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
 

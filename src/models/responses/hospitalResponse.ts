@@ -5,6 +5,8 @@ export interface HospitalResponse {
   name: string;
   specialization: string;
   ownership: string;
+  email: string;
+  phoneNumber: string;
   addresses: AddressResponse[];
 }
 
@@ -13,5 +15,7 @@ export const emptyHospitalResponse: HospitalResponse = {
   name: "",
   specialization: "",
   ownership: "",
+  email: "",
+  phoneNumber: "",
   addresses: [],
 };

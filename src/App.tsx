@@ -18,7 +18,7 @@ import {
   Register,
   Login,
 } from "./pages";
-import { Layout } from "./components";
+import { Layout, NotFound } from "./components";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +31,6 @@ const router = createBrowserRouter(
           <Route path="create" element={<HospitalForm />} />
           <Route path=":id/addresses/create" element={<CreateAddress />} />
         </Route>
-
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="reviews" element={<Reviews />} />
@@ -39,8 +38,9 @@ const router = createBrowserRouter(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+        <Route path="logout" element={<Navigate to="/admin/login" />} />
       </Route>
-      <Route path="logout" element={<Navigate to="/admin/login" />} />
+        <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

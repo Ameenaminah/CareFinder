@@ -10,6 +10,7 @@ import {
 export interface IHospitalService {
   getHospitals(): Promise<HospitalResponse[] | null>;
   exportHospitals(): Promise<Blob | null>;
+  shareHospitals(): Promise<Blob | null>;
   getHospital(id: number | undefined): Promise<HospitalDetailsResponse | null>;
   createHospital(
     input: CreateHospitalRequest
@@ -54,6 +55,19 @@ export class HospitalService implements IHospitalService {
     return null;
   }
 
+  async shareHospitals(): Promise<Blob | null> {
+    try {
+      const url = "/hospitals/share";
+
+      const shareResponse = await this.restService.get<Blob | null>(url);
+
+      return shareResponse;
+    } catch (error) {
+      console.error(`unable to get hospitals: ${error}`);
+    }
+    return null;
+  }
+
   async getHospital(id: number): Promise<HospitalDetailsResponse | null> {
     try {
       const url = `/hospitals/${id}`;
@@ -74,7 +88,7 @@ export class HospitalService implements IHospitalService {
     try {
       const url = "/hospitals";
 
-      const newHospitalResponse = await this.restService.post<
+      const newHospitalResponse = await this.authorizedRestService.post<
         HospitalCreatedResponse,
         CreateHospitalRequest
       >(url, input);
