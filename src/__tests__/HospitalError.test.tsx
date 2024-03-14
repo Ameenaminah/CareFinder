@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { HospitalError } from "../components";
+ import { HospitalError } from "../components";
 import { TestWrapper } from "./_TestWrapper";
 
 describe("Hospital error page", () => {
