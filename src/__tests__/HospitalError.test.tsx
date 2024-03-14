@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { HospitalError } from "../components";
+ import { HospitalError } from "../components";
 import { TestWrapper } from "./_TestWrapper";
 
 describe("Hospital error page", () => {
-
+  
   it("should have a button to add new hospital", () => {
     render(
       <TestWrapper>
