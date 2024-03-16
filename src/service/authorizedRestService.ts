@@ -58,14 +58,24 @@ export class AuthorizedRestService extends RestService {
 	}
 
 	async delete(endpoint: string, additionalHeaders?: AxiosRequestHeaders): Promise<void> {
-		const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
-		if (!authorizationHeaderToken) {
-			return;
+		// const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+		// if (!authorizationHeaderToken) {
+		// 	return;
+		// }
+
+		// additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
+
+		// return await super.delete(endpoint, additionalHeaders);
+		try {
+			const authorizationHeaderToken = await this.getAuthorizationHeaderToken();
+
+			additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
+
+			return await super.delete(endpoint, additionalHeaders);
+		} catch (error) {
+			console.log(error);
+			throw error;
 		}
-
-		additionalHeaders = this.getDefaultHeaders(authorizationHeaderToken, additionalHeaders);
-
-		return await super.delete(endpoint, additionalHeaders);
 	}
 
 	private getDefaultHeaders(

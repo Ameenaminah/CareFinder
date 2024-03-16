@@ -10,6 +10,7 @@ import { Spinner } from "../../components";
 import { columns } from "../../data/columns";
 import { useDispatch } from "react-redux";
 import { setHospitals } from "../../state/features/hospital/hospitalSlice";
+import { HospitalResponse } from "../../models";
 
 export const Hospitals = () => {
 	const dispatch = useDispatch();
@@ -18,6 +19,9 @@ export const Hospitals = () => {
 	const {
 		value: { hospitals },
 	} = useAppSelector((s) => s.hospital);
+
+	const [filteredHospitals, setFilteredHospitals] = useState<HospitalResponse[]>([]);
+	const [searchValue, setSearchValue] = useState("");
 
 	const { isLoading, error, data } = useQuery({
 		queryKey: ["hospitals"],
@@ -31,6 +35,31 @@ export const Hospitals = () => {
 			dispatch(setHospitals(data));
 		}
 	}, [dispatch, data]);
+
+	useEffect(() => {
+		// Filter hospitals based on the search value
+		// const filtered = hospitals.filter((hospital) =>
+		// 	hospital.addresses[0]?.state.toLowerCase().includes(searchValue.toLowerCase()),
+		// );
+
+		const filtered = hospitals.filter((hospital) => {
+			switch (filter) {
+				case "name":
+					return hospital.name.toLowerCase().includes(searchValue.toLowerCase());
+				case "specialization":
+					return hospital.specialization.toLowerCase().includes(searchValue.toLowerCase());
+				case "state":
+					return hospital.addresses[0]?.state.toLowerCase().includes(searchValue.toLowerCase());
+				default:
+					return true; // No filter selected, return all hospitals
+			}
+		});
+		setFilteredHospitals(filtered);
+	}, [hospitals, searchValue]);
+
+	const handleSearch = (value: string) => {
+		setSearchValue(value);
+	};
 
 	const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -49,7 +78,7 @@ export const Hospitals = () => {
 		<>
 			<main className={isSidebarOpen ? "space-toggle " : ""}>
 				<div className="hospitalContainer">
-					<SearchForm />
+					<SearchForm handleSearch={handleSearch} />
 					<hr className="divider" />
 					{error && <p>{error.message}</p>}
 					{!isLoading && hospitals ? (
@@ -62,7 +91,7 @@ export const Hospitals = () => {
 								rowSelection={rowSelection}
 								// columns={[columns, deleteAction]}
 								columns={columns}
-								dataSource={hospitals.map((hospital) => ({
+								dataSource={filteredHospitals.map((hospital) => ({
 									...hospital,
 									key: hospital.id,
 								}))}
