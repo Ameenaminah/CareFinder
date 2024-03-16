@@ -3,34 +3,17 @@ import { FaSearch } from "react-icons/fa";
 import { TbMailShare } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useAppSelector, useInjectedService } from "../../hooks";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback } from "react";
 import { message } from "antd";
 
 interface Props {
-	// handleSearch: (value: string) => void;
-	handleSearch: (filterBy: string, value: string) => void;
+	handleSearch: (value: string) => void;
+	handleFilterChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const SearchForm: FC<Props> = ({ handleSearch }) => {
+export const SearchForm: FC<Props> = ({ handleSearch, handleFilterChange }) => {
 	const { hospitalService } = useInjectedService();
 	const { isAuthenticated } = useAppSelector((s) => s.user);
-	const [search, setSearch] = useState("");
-	const [filterBy, setFilterBy] = useState("");
-
-	console.log(search, "here");
-
-	const handleSearchChange = useCallback(
-		(value: string) => {
-			setSearch(value);
-			handleSearch(filterBy, value);
-		},
-		[filterBy, handleSearch],
-	);
-
-	const handleFilterChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-		setFilterBy(e.target.value);
-		setSearch(""); // Clear search value when filter changes
-	}, []);
 
 	const handleExportFileButton = useCallback(async () => {
 		const exportResponse = await hospitalService.exportHospitals();
@@ -71,7 +54,10 @@ export const SearchForm: FC<Props> = ({ handleSearch }) => {
 						id=""
 						placeholder="enter search item"
 						className="searchInput"
-						onChange={(e) => handleSearchChange(e.target.value)}
+						onChange={(e) => {
+							const { value } = e.target;
+							handleSearch(value);
+						}}
 					/>
 				</div>
 				<div className="hospitalFilterContainer">

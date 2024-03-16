@@ -22,6 +22,7 @@ export const Hospitals = () => {
 
 	const [filteredHospitals, setFilteredHospitals] = useState<HospitalResponse[]>([]);
 	const [searchValue, setSearchValue] = useState("");
+	const [filterBy, setFilterBy] = useState("");
 
 	const { isLoading, error, data } = useQuery({
 		queryKey: ["hospitals"],
@@ -36,30 +37,38 @@ export const Hospitals = () => {
 		}
 	}, [dispatch, data]);
 
-	useEffect(() => {
-		// Filter hospitals based on the search value
-		// const filtered = hospitals.filter((hospital) =>
-		// 	hospital.addresses[0]?.state.toLowerCase().includes(searchValue.toLowerCase()),
-		// );
+	const handleFilterChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+		setFilterBy(e.target.value);
+		setSearchValue("");
+	}, []);
 
-		const filtered = hospitals.filter((hospital) => {
-			switch (filter) {
-				case "name":
+	const handleFilter = useCallback(
+		(filterBy: string, searchValue: string) => {
+			const filtered = hospitals.filter((hospital) => {
+				if (filterBy === "name") {
 					return hospital.name.toLowerCase().includes(searchValue.toLowerCase());
-				case "specialization":
+				} else if (filterBy === "specialization") {
 					return hospital.specialization.toLowerCase().includes(searchValue.toLowerCase());
-				case "state":
+				} else if (filterBy === "state") {
 					return hospital.addresses[0]?.state.toLowerCase().includes(searchValue.toLowerCase());
-				default:
-					return true; // No filter selected, return all hospitals
-			}
-		});
-		setFilteredHospitals(filtered);
-	}, [hospitals, searchValue]);
+				}
+				return true;
+			});
+			setFilteredHospitals(filtered);
+		},
+		[hospitals],
+	);
+	const handleSearch = useCallback(
+		(value: string) => {
+			setSearchValue(value);
+			handleFilter(filterBy, value);
+		},
+		[filterBy, handleFilter],
+	);
 
-	const handleSearch = (value: string) => {
-		setSearchValue(value);
-	};
+	useEffect(() => {
+		handleFilter(filterBy, searchValue);
+	}, [filterBy, searchValue, handleFilter]);
 
 	const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -78,7 +87,7 @@ export const Hospitals = () => {
 		<>
 			<main className={isSidebarOpen ? "space-toggle " : ""}>
 				<div className="hospitalContainer">
-					<SearchForm handleSearch={handleSearch} />
+					<SearchForm handleSearch={handleSearch} handleFilterChange={handleFilterChange} />
 					<hr className="divider" />
 					{error && <p>{error.message}</p>}
 					{!isLoading && hospitals ? (
