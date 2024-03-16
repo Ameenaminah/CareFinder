@@ -7,6 +7,7 @@ import { Input, Spinner } from "../../components";
 import { FC, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserLoginRequest } from "../../models";
+import { message } from "antd";
 
 export const Login: FC = () => {
 	const { isSidebarOpen } = useSidebar();
@@ -34,8 +35,10 @@ export const Login: FC = () => {
 			const tokenResult = await userService.login(LoginUserInput);
 
 			if (tokenResult == null) {
+				message.error("Unable to logIn Please try again");
 				return;
 			}
+			message.success("Successfully logged In");
 			navigate("/");
 		},
 

@@ -36,6 +36,9 @@ const userSlice = createSlice({
 			};
 			state.isAuthenticated = true;
 		},
+		tokenExpired(state) {
+			state.isAuthenticated = false;
+		},
 		loginFailed(state) {
 			state.value = { ...initialState.value };
 			state.isAuthenticated = false;
@@ -47,6 +50,6 @@ const userSlice = createSlice({
 	},
 });
 
-export const { logout, loginSuccess, loginFailed } = userSlice.actions;
+export const { logout, loginSuccess, loginFailed, tokenExpired } = userSlice.actions;
 
 export default userSlice.reducer;

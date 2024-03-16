@@ -45,7 +45,6 @@ export class UserService implements IUserService {
 	}
 
 	logout(): void {
-		// localStorage.removeItem("persist:root");
 		store.dispatch(logout());
 	}
 }

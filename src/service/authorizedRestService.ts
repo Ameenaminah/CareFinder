@@ -1,6 +1,9 @@
 import { AxiosHeaders, AxiosRequestHeaders } from "axios";
 import { RestService } from "./restService";
 import { store } from "../state/store";
+import { message } from "antd";
+import { jwtDecode } from "jwt-decode";
+import { tokenExpired } from "../state/features/user/userSlice";
 
 export class AuthorizedRestService extends RestService {
 	constructor(url: string) {
@@ -91,11 +94,37 @@ export class AuthorizedRestService extends RestService {
 	}
 
 	private async getAuthorizationHeaderToken(): Promise<string | null> {
-		const token = await store.getState()?.user?.value.token;
+		const token = await this.getAccessToken();
 		if (!token) {
 			return null;
 		}
 
 		return "Bearer " + token;
+	}
+
+	private async getAccessToken(): Promise<string | null> {
+		const token = await store.getState()?.user?.value.token;
+		if (!token) {
+			return null;
+		}
+
+		if (this.isTokenExpired(token)) {
+			message.error("Login expired, please re-login");
+			store.dispatch(tokenExpired());
+		}
+
+		return token;
+	}
+
+	private isTokenExpired(token: string): boolean {
+		try {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const decodedToken = jwtDecode(token) as any;
+			const currentTime = Date.now() / 1000;
+			return decodedToken.exp < currentTime;
+		} catch (error) {
+			console.error("Error decoding JWT token:", error);
+			return true;
+		}
 	}
 }

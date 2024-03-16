@@ -7,6 +7,7 @@ import { Input, Spinner } from "../../components";
 import { FC, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterUserRequest } from "../../models";
+import { message } from "antd";
 
 export const Register: FC = () => {
 	const { isSidebarOpen } = useSidebar();
@@ -45,10 +46,10 @@ export const Register: FC = () => {
 
 			try {
 				await userService.registerUser(registerUserInput);
-				console.log("User created");
+				message.success("Account created successfully, please login");
 				navigate("../login");
 			} catch (error) {
-				console.error("User registration failed", error);
+				message.error(`Unable to create an account ${error}`);
 			}
 		},
 
