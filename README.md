@@ -57,13 +57,12 @@ To get CareFinder up and running on your local machine, follow these steps:
 2. Change to the project directory:
 
      ```bash
- cd CareFinder
+    cd CareFinder
 
 3.  Install the required dependencies using Yarn:
 
      ```bash
     yarn install
-
 
 ## Usage
 
